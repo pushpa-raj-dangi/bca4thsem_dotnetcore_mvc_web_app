@@ -1,0 +1,50 @@
+﻿@model NewsWebApp.ViewModels.TagViewModel
+@{
+    ViewData["Title"] = "Tags";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+
+    <h1>Tags</h1>
+
+    <div class="row">
+        <div class="col-md-6">
+
+            <form asp-controller="tags" asp-action="Create" method="post">
+                @Html.LabelFor(c => c.Tag.Name)
+                <input class="form-control" asp-for="Tag.Name" /> <br />
+
+                <button type="submit" class="btn btn-primary">Create New Tag</button>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <table class="table table-hover table-striped">
+                <tr class="bg-light">
+                    <th>Name</th>
+                    <th>Slug</th>
+                </tr>
+                <tbody>
+                    @foreach (var tag in Model.Tags)
+                    {
+                        <tr>
+                            <td class="action-table">
+                                @tag.Name
+                                <span class="action-link">
+                                    <a asp-action="Delete"> Delete </a>
+                                    <a asp-route-id="@tag.Id" asp-controller="Tags" asp-action="Edit"> Edit </a>
+                                </span>
+                            </td>
+                            <td>@tag.Slug</td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+</div>
+
+
+

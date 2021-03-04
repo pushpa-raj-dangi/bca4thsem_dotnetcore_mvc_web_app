@@ -1,0 +1,360 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+.action-table:hover > .action-link {
+    visibility: visible !important;
+    display: block;
+}
+
+img {
+    max-width: 100%;
+}
+#wrap .card img {
+    height: 145px;
+    object-fit: cover;
+}
+
+.my-nav .nav-link:hover {
+    color: red !important;
+}
+.table-hover .table-active{
+    height:40px;
+}
+.table-hover tbody tr {
+    height: 100px;
+}
+a {
+    color: #333;
+}
+.login-wrap {
+    background: #fcfcfc;
+    padding: 55px;
+    border-radius: 5px;
+    box-shadow: 0 2px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);
+}
+
+.tag {
+    background: #f9f9f9;
+    box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 8%) !important;
+    padding: 10px;
+    color: #7476a1;
+    margin-right: 12px;
+    font-weight: 500;
+    border-radius: 20px;
+    transition: 0.6s ease-in-out;
+    border: 1px solid #ffeded;
+}
+
+
+    .tag:hover {
+        background: #0e5dae;
+        color:#fff;
+    }
+
+.action-table .action-link {
+    visibility: hidden;
+    cursor: pointer;
+    position: absolute;
+}
+
+.my-header {
+    /*background: #0e5dae;*/
+    color: #fff;
+}
+
+.cat-title {
+    background: #0e5dae;
+    font-size: 18px !important;
+    line-height: 30px !important;
+    padding: 3px 50px 0 30px !important;
+    font-weight: 600 !important;
+    color: #fff;
+    display: inline-block;
+    clip-path: polygon(0 0, 88% 0, 100% 100%, 0% 100%);
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1.4px;
+}
+
+.latest img {
+    width: 100px;
+    height: 90px;
+    object-fit: cover;
+}
+
+.latest .media {
+    border-bottom: 2px solid #dddd;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+.my-nav {
+    background: #0e5dae !important
+}
+
+.logo-img {
+    background: white;
+    padding: 10px;
+    border-radius: 50px;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    object-fit: contain;
+}
+
+.feature-news .overlay:before {
+    background-image: linear-gradient(to top,#768549,rgba(118,133,73,0.9),rgba(118,133,73,0.9),transparent,transparent) !important;
+}
+
+
+.feature-news .category span {
+    background: #f1a636;
+}
+
+.feature-news {
+    background: #fff2f2;
+    padding: 70px 0px;
+    margin: 0;
+}
+
+
+
+.tech li.media {
+    border-bottom: 1px solid #ddd;
+    margin: 30px 0px;
+    padding: 15px 0px;
+}
+
+.fb, .yt, .tw, .insta {
+    color: #fff;
+    font-weight: bold;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    height: 40px;
+    box-shadow: 0px 2px 2px 1px #05040463;
+    width: 40px;
+    text-align: center;
+    justify-content: space-evenly;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+.square-img img {
+    height: 625px;
+    width:100%;
+    position: relative;
+    object-fit: cover;
+}
+
+a {
+    background: -webkit-gradient(linear, left top, right top, from(currentColor), to(currentColor));
+    background: -webkit-linear-gradient(left, currentColor 0%, currentColor 100%);
+    background: -o-linear-gradient(left, currentColor 0%, currentColor 100%);
+    background: linear-gradient(to right, currentColor 0%, currentColor 100%);
+    background-size: 0px 2px;
+    background-position: 0 95%;
+    -webkit-transition: background-size .25s cubic-bezier(.785, .135, .15, .86) 0s;
+    -o-transition: background-size .25s cubic-bezier(.785, .135, .15, .86) 0s;
+    transition: background-size .25s cubic-bezier(.785, .135, .15, .86) 0s;
+    background-repeat: no-repeat;
+}
+
+    a:hover {
+        background-size: 100% 2px;
+        transition: all .3s ease 0s;
+        text-decoration: none;
+    }
+
+.time {
+    font-size: 15px;
+    margin-top: 15px;
+    color: #fff
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    padding: 10px;
+    background-color: rgba(221, 221, 221, 0.75);
+    margin-right: 5px;
+}
+
+.overlay:before {
+    content: '';
+    height: 100%;
+    width: 100%;
+    background-image: linear-gradient(to top,rgba(0,0,0,0.88),rgba(0,0,0,0.58),transparent,transparent);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 4;
+}
+
+.small-square img {
+    height: 300px;
+    width:100%;
+    object-fit: cover;
+    position: relative
+}
+
+.square-img {
+    position: relative
+}
+
+.content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    width: 100%;
+    font-size: 25px;
+    padding: 45px;
+}
+
+.category span {
+    background: #0e5dae;
+    border-radius: 4px;
+    line-height: 28px;
+    padding: 0 15px;
+    font-weight: 700;
+    font-size: .7rem;
+    color: #fff;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.overlay a {
+    color: #ddd;
+    font-weight: bold;
+}
+
+.small-square {
+    position: relative;
+}
+
+.fb {
+    background: #3b5998;
+}
+
+.tw {
+    background: #1DA1F2;
+}
+
+.insta {
+    background: #8a3ab9;
+}
+
+.yt {
+    background: red;
+}
+
+    .fb:hover, .yt:hover, .tw:hover {
+        background: red;
+        transition: .6s all ease-in-out;
+        color: #fff;
+        cursor: pointer
+    }
+
+.my-nav .nav-link, .navbar-brand {
+    font-weight: 600;
+    color: #ffffff !important;
+    text-transform: uppercase;
+    font-size: 16px;
+    font-family: "Poppins",sans-serif;
+    margin-right: 18px;
+}
+
+.logo:before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 220px;
+    left: 0;
+    right: 0;
+    background: red;
+    height: 5px;
+    border-radius: 10px;
+}
+
+.logo {
+    font-weight: bold;
+    color: #0e5dae !important;
+    position: relative;
+}
+
+a.navbar-brand {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+}
+
+/* Provide sufficient contrast against white background */
+
+
+.btn-primary {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.border-top {
+    border-top: 1px solid #e5e5e5;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+    font-size: 1rem;
+    line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    /* Margin bottom by footer height */
+}
+
+.footer {
+    padding: 40px 0px;
+    background: #f1f1f1;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 45px; /* Vertically center the text there */
+}

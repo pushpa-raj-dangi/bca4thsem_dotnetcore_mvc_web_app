@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Post>
+@{
+    ViewData["Title"] = "All posts ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+
+    <h1>All Post</h1>
+    <div class="row">
+
+        <table class="table table-hover">
+            <tr class="table-active">
+                <td>
+                    Title
+                </td>
+                <td>
+                    Categories
+                </td>
+                <td>
+                    Tags
+                </td>
+            </tr>
+            <tbody>
+                @foreach (var post in Model)
+                {
+                    <tr>
+                        <td class="action-table">
+                            @post.Name
+                            <span class="action-link">
+                                <a href="Delete">Delete</a> |
+                                <a href="Edit">Edit</a> |
+                                <a href="/posts/Details/@post.Id">View</a>
+                            </span>
+                        </td>
+                        
+                        <td>
+                            @string.Join(", ", post.PostCategories.Select(p => p.Category.Name))
+                        </td>   
+
+                        <td>
+                            @string.Join(", ", post.PostTags.Select(p => p.Tag.Name))
+                        </td>
+
+                    </tr>
+
+
+                }
+            </tbody>
+
+
+        </table>
+    </div>
+</div>

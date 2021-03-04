@@ -1,0 +1,71 @@
+﻿@model Post
+@{
+    ViewData["Title"] = Model.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var posts = ViewData["relatedPost"] as IEnumerable<Post>;
+
+}
+
+<div class="container">
+    <div class="row my-5">
+        <div class="col-md-8">
+            <div class="shadow-sm p-3">
+                <h3 class="my-5">@Model.Name</h3>
+                <hr />
+                <div class="time text-dark">Published On 
+                    <i class="fas fa-clock"></i> @Model.CreatedDate.ToString("dddd, dd MMMM yyyy")
+                </div>
+                <hr />
+                @if (Model.Picture != null)
+                {
+                    <img src="~/uploads/@Model.Picture" />
+                }
+                <hr />
+                @foreach (var item in Model.PostCategories)
+                {
+                    <a href="/posts/postbycat/@item.Category.Id">
+                        <div class="category">
+                            <span>
+                                @item.Category.Name
+                            </span>
+                        </div>
+                    </a>
+                }
+                @Html.Raw(Model.Content)
+
+                <div class="tag-wrapper my-5">
+
+                    @foreach (var item in Model.PostTags)
+                    {
+                        <a href="/posts/postbytag/@item.Tag.Id" class="tag">
+                            # @item.Tag.Name
+                        </a>
+                    }
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-4">
+            @await Html.PartialAsync("_Latest")
+            <partial name="_Latest" />
+        </div>
+
+        <div class="col-md-12 my-4">
+            <div class="cat-title"> Related News    </div>
+        </div>
+        @foreach (var post in posts)
+        {
+
+            <div class="col-md-4 my-4">
+                <a href="/posts/details/@post.Id">
+                    <div class="card shadow-sm border-0 p-3">
+                        @post.Name
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+
+</div>
+
+

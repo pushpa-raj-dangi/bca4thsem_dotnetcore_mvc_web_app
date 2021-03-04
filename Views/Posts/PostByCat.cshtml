@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Post>
+@{
+    ViewData["Title"] =ViewData["category"] + "Category";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var category = ViewData["category"];
+}
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-12">
+        <h1 class="shadow-sm p-2 cat-title"> @category</h1>
+        </div>
+
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4 mb-4">
+
+                <a href="/posts/details/@item.Id">
+                    <div class="card">
+                        <img src="/uploads/@item.Picture" alt="" />
+                        <div class="card-body">
+                            @item.Name
+                        </div>
+                    </div>
+                </a>
+            </div>
+        }
+
+    </div>
+</div>
+

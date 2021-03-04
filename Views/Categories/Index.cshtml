@@ -1,0 +1,56 @@
+﻿@model NewsWebApp.ViewModels.CategoryViewModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+
+    <h1>Categories</h1>
+    <div class="row">
+        <div class="col-md-4">
+            <form class="form-group mb-5" method="post" asp-action="Index">
+
+                @Html.LabelFor(c => c.Category.Name)
+                @Html.TextBoxFor(c => c.Category.Name, new { @class="form-control"})
+                @*<input type="text" asp-for="Category.Name" class="form-control my-3" />*@
+                @Html.HiddenFor(c => c.Category.Id)
+                
+                <input type="submit" class="btn btn-primary mt-3" name="name" value="Add New Category" />
+            </form>
+        </div>
+        <div class="col-md-8">
+            <table class="table table-hover">
+               
+                <tr class="table-active">
+                    <td>
+                        Category
+                    </td>
+                    <td>
+                        Slug
+                    </td>
+                </tr>
+                <tbody>
+                    @foreach (var cat in Model.Categories)
+                    {
+                        <tr>
+                            <td class="action-table">
+                                @cat.Name
+                                <span class="action-link">
+                                    <a href="/categories/delete/@cat.Id">Delete</a>
+                                    <a href="/categories/edit/@cat.Id">Edit</a>
+                                </span>
+                            </td>
+                            <td>@cat.Slug</td>
+                        </tr>
+
+                    }
+                </tbody>
+
+
+            </table>
+
+        </div>
+    </div>
+
+</div>
+

@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Post>
+@{
+    ViewData["Title"] = ViewData["tag"] + " Tags";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var tag = ViewData["tag"];
+
+}
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="cat-title">@tag</div>
+        </div>
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4">
+                <a href="/posts/details/@item.Id">
+                    <div class="card">
+                        <img src="@item.Picture" alt="" />
+                        <div class="card-body">
+                            @item.Name
+                        </div>
+                    </div>
+                </a>
+            </div>
+        }
+
+    </div>
+</div>
+
