@@ -8,14 +8,14 @@
     <h1>Categories</h1>
     <div class="row">
         <div class="col-md-4">
-            <form class="form-group mb-5" method="post" asp-action="Index">
+            <form asp-controller="categories" asp-action="Create" method="post">
 
                 @Html.LabelFor(c => c.Category.Name)
-                @Html.TextBoxFor(c => c.Category.Name, new { @class="form-control"})
-                @*<input type="text" asp-for="Category.Name" class="form-control my-3" />*@
+                @*@Html.TextBoxFor(c => c.Category.Name, new { @class = "form-control" })*@
+                <input type="text" asp-for="Category.Name" class="form-control my-3" />
                 @Html.HiddenFor(c => c.Category.Id)
-                
-                <input type="submit" class="btn btn-primary mt-3" name="name" value="Add New Category" />
+
+                <button type="submit" class="btn btn-primary">Create New Category</button>
             </form>
         </div>
         <div class="col-md-8">

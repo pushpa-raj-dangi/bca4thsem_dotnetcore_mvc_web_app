@@ -106,6 +106,75 @@ namespace NewsWebApp.Controllers
         }
 
         [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var viewModel = new PostViewModel
+            {
+                Categories = _context.Categories.ToList(),
+                Tags = _context.Tags.ToList(),
+                Posts = _context.Posts.ToList(),
+                Post = _context.Posts.Find(id)
+            };
+            return View(viewModel);
+        }
+        [HttpPost]
+        public IActionResult Edit(PostCreateViewModel newspost, int[] SelectedCategoryIds, int[] SelectedTagIds)
+        {
+            string unique = null;
+
+            if (newspost.Picture.FileName != null)
+            {
+                string uploadsFolder = Path.Combine(hostingEnvironment.WebRootPath, "uploads");
+                unique = Guid.NewGuid().ToString() + "_" + newspost.Picture.FileName;
+                string filePath = Path.Combine(uploadsFolder, unique);
+                newspost.Picture.CopyTo(new FileStream(filePath, FileMode.Create));
+
+
+            }
+
+            var rand = new Random();
+            var slug = SlugHelper.GenerateSlug(newspost.Name);
+            while (_context.Posts.Any(t => t.Slug == slug))
+            {
+                slug += rand.Next(1000, 9999);
+            }
+            newspost.Slug = slug;
+
+
+            foreach (var selectedCatId in SelectedCategoryIds)
+            {
+                newspost.PostCategories.Add(new PostCategory { CategoryId = selectedCatId });
+            }
+
+            foreach (var selectedTagId in SelectedTagIds)
+            {
+                newspost.PostTags.Add(new PostTag { TagId = selectedTagId });
+            }
+
+
+            if (!ModelState.IsValid)
+                return View();
+
+            var postModel = new Post
+            {
+                Content = newspost.Content,
+                Name = newspost.Name,
+                Categories = newspost.Categories,
+                Tags = newspost.Tags,
+                PostCategories = newspost.PostCategories,
+                PostStatus = newspost.PostStatus,
+                Picture = unique,
+                PostTags = newspost.PostTags,
+                Slug = newspost.Slug
+            };
+            _context.Add(postModel);
+            _context.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
+        }
+
+
+        [HttpGet]
         public IActionResult Details(int id)
         {
             var post = _context.Posts.Include(p => p.PostCategories).ThenInclude(c => c.Category).Include(tag => tag.PostTags).ThenInclude(pt => pt.Tag).FirstOrDefault(p=>p.Id==id);
@@ -120,7 +189,10 @@ namespace NewsWebApp.Controllers
         public IActionResult PostByCat(int id)
         {
             var post = _context.Posts.Where(p => p.PostCategories.Any(pc => pc.CategoryId == id)).ToList();
+            
             ViewData["category"] = _context.Categories.SingleOrDefault(p=>p.Id==id).Name;
+            if (post == null)
+                return NotFound();
             return View(post);
         }
 
@@ -134,14 +206,7 @@ namespace NewsWebApp.Controllers
             return View(post);
         }
 
-        public IActionResult Edit(int id)
-        {
-            var post = _context.Posts.Include(p => p.PostCategories).ThenInclude(c => c.Category).Include(tag => tag.PostTags).ThenInclude(pt => pt.Tag).FirstOrDefault(p => p.Id == id);
-            var p = post.PostCategories.Select(p => p.CategoryId);
-            ViewData["relatedPost"] = _context.Posts.Where(p => p.PostCategories.Any(pc => pc.CategoryId == p.Id)).ToList();
-
-            return View(post);
-        }
+        
 
     }
 }

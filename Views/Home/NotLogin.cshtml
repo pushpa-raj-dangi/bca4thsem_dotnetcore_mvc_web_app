@@ -36,7 +36,7 @@
                                     </a>
                                 }*@
                             <br />
-                            <a href="/posts/details/@news.Id">
+                            <a asp-controller="posts" asp-action="details" asp-route-id="@news.Id">
                                 @news.Name
                             </a>
                             <div class="time">
@@ -67,21 +67,12 @@
                     }
                     <div class="content">
 
-                        <a class="category" href="/posts/postbycat/@news.PostCategories.FirstOrDefault().Category.Id">
+                        @*<a class="category" href="/posts/postbycat/@news.PostCategories.FirstOrDefault().Category.Id">
                             <span>
                                 @news.PostCategories.FirstOrDefault().Category.Name
                             </span>
-                        </a>
+                        </a>*@
 
-                        @*@foreach (var item in news.PostCategories)
-                            {
-
-                                <a class="category" href="/posts/postbycat/@item.Category.Id">
-                                    <span>
-                                        @item.Category.Name
-                                    </span>
-                                </a>
-                            }*@
                         <br />
                         <h6>
                             <a href="/posts/details/@news.Id">
@@ -112,11 +103,11 @@
                     <div class="square-img overlay">
                         <img src="~/uploads/@news.Picture" style="height:400px;width:100%" alt="Alternate Text" />
                         <div class="content">
-                            <div class="category">
+                            @*<div class="category">
                                 <span>
                                     @news.PostCategories.FirstOrDefault().Category.Name
                                 </span>
-                            </div>
+                            </div>*@
 
                             <a href="/posts/details/@news.Id">
                                 @news.Name
@@ -230,11 +221,11 @@
                         <div class="square-img overlay">
                             <img src="~/uploads/@post.Picture" style="height:450px;width:100%;border-radius:5px" alt="Alternate Text" />
                             <div class="content p-3" style="border-radius:5px">
-                                <div class="category">
+                                @*<div class="category">
                                     <span>
                                         @post.PostCategories.FirstOrDefault().Category.Name
                                     </span>
-                                </div>
+                                </div>*@
 
                                 <h5>
 
@@ -264,7 +255,7 @@
                 @foreach (var post in Model.LatestUpdate)
                 {
                     <li class="media">
-                        <a class="row" href="/posts/deatils/@post.Id">
+                        <a class="row" asp-controller="posts" asp-action="details"  asp-route-id="@post.Id">
                             <div class="col-md-4">
                                 <img class="mr-3" src="~/uploads/@post.Picture" alt="Generic placeholder image">
                             </div>

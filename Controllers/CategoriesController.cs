@@ -33,44 +33,51 @@ namespace NewsWebApp.Controllers
 
 
         [HttpPost]
-        public IActionResult Edit(Category category)
+        public IActionResult Create(Category category)
         {
-            if (category.Id == 0)
-            {
-                _context.Categories.Add(category);
-            }
-            else
-            {
-                var categoryIndb = _context.Categories.Single(c => c.Id == category.Id);
-                categoryIndb.Name = category.Name;
-                categoryIndb.Slug = SlugHelper.GenerateSlug(category.Name);
-
-
-            };
-
             if (!ModelState.IsValid)
                 return View();
-            var slug = SlugHelper.GenerateSlug(category.Name);
+            category.Slug = SlugHelper.GenerateSlug(category.Name);
+            _context.Add(category);
             _context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
 
 
-       
+
+
 
 
         public IActionResult Edit(int id)
-       {
+        {
 
 
             var categories = _context.Categories.SingleOrDefault(c => c.Id == id);
 
-           if (categories == null)
-               return NotFound();
+            if (categories == null)
+                return NotFound();
 
-           return View("Edit",categories);
+            return View("Edit", categories);
         }
 
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var category = _context.Categories.Find(id);
+            if (category == null)
+                return RedirectToAction(nameof(Index));
+            return View(category);
+        }
+
+        public IActionResult DeleteConfirm(int id)
+        {
+            var category = _context.Categories.Find(id);
+            if (category == null)
+                return RedirectToAction(nameof(Index));
+            _context.Remove(category);
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
 
     }
 }

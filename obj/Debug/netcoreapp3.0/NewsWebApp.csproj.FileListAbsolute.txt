@@ -598,3 +598,4 @@ D:\NewsWebApp\obj\Debug\netcoreapp3.0\Razor\Views\Shared\_HomeUpdate.cshtml.g.cs
 D:\4thsem\NewsWebApp\obj\Debug\netcoreapp3.0\Razor\Views\Posts\Edit.cshtml.g.cs
 D:\4thsem\NewsWebApp\obj\Debug\netcoreapp3.0\Razor\Views\Shared\_HomeUpdate.cshtml.g.cs
 D:\4thsem\NewsWebApp\obj\Debug\netcoreapp3.0\Razor\Views\Tags\Delete.cshtml.g.cs
+D:\4thsem\NewsWebApp\obj\Debug\netcoreapp3.0\Razor\Views\Categories\Delete.cshtml.g.cs
