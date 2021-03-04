@@ -70,5 +70,7 @@ namespace NewsWebApp.Controllers
 
            return View("Edit",categories);
         }
+
+
     }
 }
