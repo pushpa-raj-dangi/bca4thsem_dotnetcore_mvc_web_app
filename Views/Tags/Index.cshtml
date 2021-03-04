@@ -30,7 +30,7 @@
                             <td class="action-table">
                                 @tag.Name
                                 <span class="action-link">
-                                    <a asp-action="Delete"> Delete </a>
+                                    <a asp-route-id="@tag.Id" asp-controller="Tags" asp-action="Delete" > Delete </a>
                                     <a asp-route-id="@tag.Id" asp-controller="Tags" asp-action="Edit"> Edit </a>
                                 </span>
                             </td>

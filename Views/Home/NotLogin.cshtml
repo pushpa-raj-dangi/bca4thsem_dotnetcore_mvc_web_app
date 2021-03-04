@@ -175,7 +175,8 @@
                         <img class="mr-3" src="~/uploads/@post.Picture" alt="Generic placeholder image">
                         <div class="media-body">
                             <h6 class="mt-0 mb-1">
-                                @post.Name.Length < 0 ? @post.Name : @post.Name.Substring(0,10)
+                                @post.Name
+                                @*@{post.Name.Length < 0 ? post.Name : post.Name.Substring(0, 10);}*@
                             </h6>
                             <div class="time text-dark">
                                 <i class="fas fa-clock"></i>  @post.CreatedDate.ToString("dddd, dd MMMM yyyy")

@@ -50,6 +50,25 @@ namespace NewsWebApp.Controllers
             return View("Edit",tag);
         }
 
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var tag = _context.Tags.Find(id);
+            if (tag == null)
+                return RedirectToAction(nameof(Index));
+            return View(tag);
+        }
+
+
+        public IActionResult DeleteConfirm(int id)
+        {
+            var tag = _context.Tags.Find(id);
+            if (tag == null)
+                return RedirectToAction(nameof(Index));
+            _context.Remove(tag);
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
 
 
     }
