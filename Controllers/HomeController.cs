@@ -36,7 +36,8 @@ namespace NewsWebApp.Controllers
             {
                 PoliticsNews = _context.Posts.Where(p => p.PostCategories.Any(pc => pc.CategoryId == 5)).ToList().Take(3),
 
-                LatestUpdate = _context.Posts.Include(p => p.PostCategories).ThenInclude(c => c.Category).Include(tag => tag.PostTags).ThenInclude(pt => pt.Tag).Take(3).OrderByDescending(p=>p.Id)
+                LatestUpdate = _context.Posts.Include(p => p.PostCategories).ThenInclude(c => c.Category).Include(tag => tag.PostTags).ThenInclude(pt => pt.Tag).Take(3).OrderByDescending(p=>p.Id),
+                Categories = _context.Categories.ToList()
 
         };
 

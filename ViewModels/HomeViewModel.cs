@@ -19,9 +19,6 @@ namespace NewsWebApp.ViewModels
         public IEnumerable<Post> BusinessNews { get; set; }
         public IEnumerable<Post> FeatureNews { get; set; }
         public IEnumerable<Post> LatestUpdate { get; set; }
-
-
-
-
+        public IEnumerable<Category> Categories { get; set; }
     }
 }

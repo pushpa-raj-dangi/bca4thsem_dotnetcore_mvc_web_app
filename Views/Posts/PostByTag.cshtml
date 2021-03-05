@@ -14,10 +14,22 @@
         </div>
         @foreach (var item in Model)
         {
+
+
             <div class="col-md-4">
+
+
                 <a href="/posts/details/@item.Id">
                     <div class="card">
-                        <img src="@item.Picture" alt="" />
+                        @if (item.Picture == null)
+                        {
+
+                            <img src="/uploads/five.jpg" />
+                        }
+                        else
+                        {
+                            <img class="card-img-top" src="@item.Picture" alt="" />
+                        }
                         <div class="card-body">
                             @item.Name
                         </div>
