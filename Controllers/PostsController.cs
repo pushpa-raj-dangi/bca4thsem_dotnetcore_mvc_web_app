@@ -26,15 +26,9 @@ namespace NewsWebApp.Controllers
         }
         public IActionResult Index()
         {
-            //var posts = _context.Posts.Include(cat=>cat.Categories).ToList();
-            //var postVm = new PostViewModel
-            //{
-            //    Posts = _context.Posts.Include(post => post.PostCategories).ThenInclude(pt=>pt.Category).ToList(),
-
-            //};
             var post = _context.Posts.Include(p => p.PostCategories).ThenInclude(c => c.Category).Include(tag => tag.PostTags).ThenInclude(pt => pt.Tag)
-
                .OrderByDescending(p => p.Id);
+        
             return View(post);
         }
 
