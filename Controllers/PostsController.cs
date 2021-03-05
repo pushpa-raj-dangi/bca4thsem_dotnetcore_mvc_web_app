@@ -32,13 +32,13 @@ namespace NewsWebApp.Controllers
             //    Posts = _context.Posts.Include(post => post.PostCategories).ThenInclude(pt=>pt.Category).ToList(),
 
             //};
-            var post = _context.Posts.Include(p => p.PostCategories).ThenInclude(c => c.Category).Include(tag=>tag.PostTags).ThenInclude(pt=>pt.Tag)
-               
+            var post = _context.Posts.Include(p => p.PostCategories).ThenInclude(c => c.Category).Include(tag => tag.PostTags).ThenInclude(pt => pt.Tag)
+
                .OrderByDescending(p => p.Id);
             return View(post);
         }
 
-        public  IActionResult Create()
+        public IActionResult Create()
         {
             var viewModel = new PostCreateViewModel
             {
@@ -66,7 +66,7 @@ namespace NewsWebApp.Controllers
 
             var rand = new Random();
             var slug = SlugHelper.GenerateSlug(newspost.Name);
-            while ( _context.Posts.Any(t => t.Slug == slug))
+            while (_context.Posts.Any(t => t.Slug == slug))
             {
                 slug += rand.Next(1000, 9999);
             }
@@ -86,7 +86,7 @@ namespace NewsWebApp.Controllers
 
             if (!ModelState.IsValid)
                 return View();
-            
+
             var postModel = new Post
             {
                 Content = newspost.Content,
@@ -99,7 +99,7 @@ namespace NewsWebApp.Controllers
                 PostTags = newspost.PostTags,
                 Slug = newspost.Slug
             };
-           _context.Add(postModel);
+            _context.Add(postModel);
             _context.SaveChanges();
 
             return RedirectToAction(nameof(Index));
@@ -177,36 +177,44 @@ namespace NewsWebApp.Controllers
         [HttpGet]
         public IActionResult Details(int id)
         {
-            var post = _context.Posts.Include(p => p.PostCategories).ThenInclude(c => c.Category).Include(tag => tag.PostTags).ThenInclude(pt => pt.Tag).FirstOrDefault(p=>p.Id==id);
+            var post = _context.Posts.Include(p => p.PostCategories).ThenInclude(c => c.Category).Include(tag => tag.PostTags).ThenInclude(pt => pt.Tag).FirstOrDefault(p => p.Id == id);
             var p = post.PostCategories.Select(p => p.CategoryId);
             ViewData["relatedPost"] = _context.Posts.Where(p => p.PostCategories.Any(pc => pc.CategoryId == p.Id)).ToList();
-          
+
             return View(post);
         }
 
 
-       
+
         public IActionResult PostByCat(int id)
         {
-            var post = _context.Posts.Where(p => p.PostCategories.Any(pc => pc.CategoryId == id)).OrderByDescending(p=>p.CreatedDate).ToList();
-            
-            ViewData["category"] = _context.Categories.SingleOrDefault(p=>p.Id==id).Name;
-            if (post == null)
-                return NotFound();
+            var post = _context.Posts.Where(p => p.PostCategories.Any(pc => pc.CategoryId == id)).OrderByDescending(p => p.CreatedDate).ToList();
+            var cat = _context.Categories.SingleOrDefault(p => p.Id == id).Name;
+
+            ViewData["category"] = cat;
             return View(post);
         }
 
-      
+
         public IActionResult PostByTag(int id)
         {
 
-            var post = _context.Posts.Where(p => p.PostTags.Any(pc => pc.TagId == id)).OrderByDescending(p=>p.CreatedDate).ToList();
+            var post = _context.Posts.Where(p => p.PostTags.Any(pc => pc.TagId == id)).OrderByDescending(p => p.CreatedDate).ToList();
             ViewData["tag"] = _context.Tags.SingleOrDefault(p => p.Id == id).Name;
 
             return View(post);
         }
 
-        
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var post = _context.Posts.Include(p => p.PostCategories).ThenInclude(c => c.Category).Include(tag => tag.PostTags).ThenInclude(pt => pt.Tag).FirstOrDefault(p => p.Id == id);
+            var p = post.PostCategories.Select(p => p.CategoryId);
+           
+
+            return View(post);
+        }
+
 
     }
 }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "vRq57tPC69u3CpfF/iuMQ6iiOUU82i/vQwWI9A/8hYluf/XJwIaJnCTzgjbnVd13MHkSaLRMiKi0BYwnbh2tzw==",
+  "dgSpecHash": "NrKq8Tutk6Q0WtGU2Auv2MQBnTcAtp1ahMSnae25adKDZJCIWzBJDGRcu1qILb8NxOozpoDEYPAs9hrIQZCNFw==",
   "success": true,
-  "projectFilePath": "D:\\NewsWebApp\\NewsWebApp.csproj",
+  "projectFilePath": "D:\\bca4thsem_dotnetcore_mvc_web_app\\NewsWebApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Dell\\.nuget\\packages\\microsoft.aspnet.mvc\\5.2.7\\microsoft.aspnet.mvc.5.2.7.nupkg.sha512",
     "C:\\Users\\Dell\\.nuget\\packages\\microsoft.aspnet.razor\\3.2.7\\microsoft.aspnet.razor.3.2.7.nupkg.sha512",

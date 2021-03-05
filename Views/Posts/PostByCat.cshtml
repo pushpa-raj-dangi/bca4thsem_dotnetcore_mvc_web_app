@@ -1,14 +1,18 @@
 ﻿@model IEnumerable<Post>
 @{
-    ViewData["Title"] = ViewData["category"] + "Category";
+    ViewData["Title"] = ViewData["category"] ==null ? ViewData["category"] : "Not Found" + "Category";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var category = ViewData["category"];
+    var category = ViewData["category"];    
 }
 
 <div class="container my-5">
     <div class="row squareimage">
         <div class="col-md-12">
-            <h1 class="shadow-sm p-2 cat-title"> @category</h1>
+
+
+         
+                <h1 class="shadow-sm p-2 cat-title"> @category</h1>
+            
         </div>
         @{ int i = 0;}
 
@@ -17,10 +21,10 @@
             i++;
             if (i == 1)
             {
-                <h1>@i</h1>
+
                 <div class="col-md-12 mb-4">
 
-                    <div class="card thulo shadow-sm border-0 rounded-0">
+                    <div class="card bg-light thulo text-center shadow-sm border-0 rounded-0">
 
                         <a href="/posts/details/@item.Id">
                             @if (item.Picture == null)
@@ -33,7 +37,7 @@
                             }
 
                             <div class="card-body">
-                                @item.Name
+                                <h1>  @item.Name</h1>
                                 <div class="time text-dark">
                                     <i class="fas fa-clock"></i> @item.CreatedDate.ToString("dddd, dd MMMM yyyy")
                                 </div>
