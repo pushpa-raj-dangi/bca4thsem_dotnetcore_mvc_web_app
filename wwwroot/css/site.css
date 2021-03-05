@@ -16,6 +16,10 @@ img {
     height: 145px;
     object-fit: cover;
 }
+.squareimage img{
+    height:300px;
+    object-fit:cover;
+}
 
 .my-nav .nav-link:hover {
     color: red !important;
@@ -35,7 +39,9 @@ a {
     border-radius: 5px;
     box-shadow: 0 2px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);
 }
-
+.thulo img{
+    width:100%;
+}
 .tag {
     background: #f9f9f9;
     box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 8%) !important;

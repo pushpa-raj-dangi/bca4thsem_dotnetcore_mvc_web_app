@@ -188,7 +188,7 @@ namespace NewsWebApp.Controllers
        
         public IActionResult PostByCat(int id)
         {
-            var post = _context.Posts.Where(p => p.PostCategories.Any(pc => pc.CategoryId == id)).ToList();
+            var post = _context.Posts.Where(p => p.PostCategories.Any(pc => pc.CategoryId == id)).OrderByDescending(p=>p.CreatedDate).ToList();
             
             ViewData["category"] = _context.Categories.SingleOrDefault(p=>p.Id==id).Name;
             if (post == null)
@@ -200,7 +200,7 @@ namespace NewsWebApp.Controllers
         public IActionResult PostByTag(int id)
         {
 
-            var post = _context.Posts.Where(p => p.PostTags.Any(pc => pc.TagId == id)).ToList();
+            var post = _context.Posts.Where(p => p.PostTags.Any(pc => pc.TagId == id)).OrderByDescending(p=>p.CreatedDate).ToList();
             ViewData["tag"] = _context.Tags.SingleOrDefault(p => p.Id == id).Name;
 
             return View(post);

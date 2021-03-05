@@ -6,33 +6,72 @@
 }
 
 <div class="container my-5">
-    <div class="row">
+    <div class="row squareimage">
         <div class="col-md-12">
             <h1 class="shadow-sm p-2 cat-title"> @category</h1>
         </div>
+        @{ int i = 0;}
 
         @foreach (var item in Model)
         {
-            <div class="col-md-4 mb-4">
+            i++;
+            if (i == 1)
+            {
+                <h1>@i</h1>
+                <div class="col-md-12 mb-4">
 
-                @if (item.Picture == null)
-                {
-                    <img src="~/uploads/five.jpg" alt="Alternate Text" />
+                    <div class="card thulo shadow-sm border-0 rounded-0">
 
-                }
-                else
-                {
-                    <a href="/posts/details/@item.Id">
-                        <div class="card">
-                            <img src="/uploads/@item.Picture" alt="" />
+                        <a href="/posts/details/@item.Id">
+                            @if (item.Picture == null)
+                            {
+                                <img src="~/uploads/five.jpg" alt="Alternate Text" />
+                            }
+                            else
+                            {
+                                <img src="/uploads/@item.Picture" alt="" />
+                            }
+
                             <div class="card-body">
                                 @item.Name
+                                <div class="time text-dark">
+                                    <i class="fas fa-clock"></i> @item.CreatedDate.ToString("dddd, dd MMMM yyyy")
+                                </div>
                             </div>
-                        </div>
-                    </a>
-                }
+                        </a>
+                    </div>
 
-            </div>
+                </div>
+            }
+            else
+            {
+
+                <div class="col-md-4 mb-4">
+
+                    <div class="card shadow-sm border-0 rounded-0">
+
+                        <a href="/posts/details/@item.Id">
+                            @if (item.Picture == null)
+                            {
+                                <img src="~/uploads/five.jpg" alt="Alternate Text" />
+                            }
+                            else
+                            {
+                                <img src="/uploads/@item.Picture" alt="" />
+                            }
+
+                            <div class="card-body">
+                                @item.Name
+                                <div class="time text-dark">
+                                    <i class="fas fa-clock"></i> @item.CreatedDate.ToString("dddd, dd MMMM yyyy")
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+            }
+
         }
 
     </div>

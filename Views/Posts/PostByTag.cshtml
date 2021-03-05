@@ -7,7 +7,7 @@
 }
 
 <div class="container my-5">
-    <div class="row">
+    <div class="row squareimage" >
         <div class="col-md-12">
 
             <div class="cat-title">@tag</div>
@@ -28,11 +28,14 @@
                         }
                         else
                         {
-                            <img class="card-img-top" src="@item.Picture" alt="" />
+                            <img class="card-img-top" src="~/uploads/@item.Picture" alt="" />
                         }
-                        <div class="card-body">
-                            @item.Name
+                    <div class="card-body">
+                        @item.Name
+                        <div class="time text-dark">
+                            <i class="fas fa-clock"></i> @item.CreatedDate.ToString("dddd, dd MMMM yyyy")
                         </div>
+                    </div>
                     </div>
                 </a>
             </div>
