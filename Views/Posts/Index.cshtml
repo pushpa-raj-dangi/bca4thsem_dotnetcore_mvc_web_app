@@ -4,50 +4,57 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="container">
-
-    <h1>All Post</h1>
     <div class="row">
-        <div class="col-md-4 offset-8"><input id="input" class="form-control my-3" type="text" placeholder="Search Post..."></div>
-        <table class="table table-hover">
-            <tr class="table-active">
-                <td>
-                    Title
-                </td>
-                <td>
-                    Categories
-                </td>
-                <td>
-                    Tags
-                </td>
-            </tr>
-            <tbody id="table">
-                @foreach (var post in Model)
-                {
-                    <tr>
-                        <td class="action-table">
-                            @post.Name
-                            <span class="action-link">
-                                <a asp-route-id="@post.Id" asp-controller="Posts" asp-action="Delete"> Delete </a>|
-                                <a href="/posts/Edit/@post.Id">Edit</a> |
-                                <a href="/posts/Details/@post.Id">View</a>
-                            </span>
-                        </td>
-
+        <div class="col-md-3">
+            <partial name="_SideNav"/>
+        </div>
+        <div class="col-md-9">
+            @*<h1>All Post</h1>*@
+            <div class="row">
+                <div class="col-md-4 offset-8"><input id="input" class="form-control my-3" type="text" placeholder="Search Post..."></div>
+                <table class="table table-hover">
+                    <tr class="table-active">
                         <td>
-                            @string.Join(", ", post.PostCategories.Select(p => p.Category.Name))
+                            Title
                         </td>
-
                         <td>
-                            @string.Join(", ", post.PostTags.Select(p => p.Tag.Name))
+                            Categories
                         </td>
-
+                        <td>
+                            Tags
+                        </td>
                     </tr>
+                    <tbody id="table">
+                        @foreach (var post in Model)
+                        {
+                            <tr>
+                                <td class="action-table">
+                                    @post.Name
+                                    <span class="action-link">
+                                        <a asp-route-id="@post.Id" asp-controller="Posts" asp-action="Delete"> Delete </a>|
+                                        <a href="/posts/Edit/@post.Id">Edit</a> |
+                                        <a href="/posts/Details/@post.Id">View</a>
+                                    </span>
+                                </td>
+
+                                <td>
+                                    @string.Join(", ", post.PostCategories.Select(p => p.Category.Name))
+                                </td>
+
+                                <td>
+                                    @string.Join(", ", post.PostTags.Select(p => p.Tag.Name))
+                                </td>
+
+                            </tr>
 
 
-                }
-            </tbody>
+                        }
+                    </tbody>
 
 
-        </table>
+                </table>
+            </div>
+        </div>
     </div>
+    
 </div>

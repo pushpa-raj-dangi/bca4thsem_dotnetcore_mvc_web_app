@@ -3,25 +3,6 @@
 @inject UserManager<IdentityUser> UserManager
 
 
-<style>
-    .show-item {
-        display: none;
-        color: #fff;
-        position: absolute;
-        bottom: -30px;
-        background: #0e5dae;
-        width: 200px;
-        z-index: 1;
-        padding: 10px;
-    }
-    #dropdownMenuLink{
-        transition:0.5s all ease-in-out;
-    }
-
-    #dropdownMenuLink:hover .show-item {
-        display: block !important;
-    }
-</style>
 
 <ul class="navbar-nav align-items-center">
     @if (SignInManager.IsSignedIn(User))

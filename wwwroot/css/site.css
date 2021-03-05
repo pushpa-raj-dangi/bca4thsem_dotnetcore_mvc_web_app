@@ -310,7 +310,24 @@ a.navbar-brand {
     background-color: #1b6ec2;
     border-color: #1861ac;
 }
+.show-item {
+    display: none;
+    color: #fff;
+    position: absolute;
+    bottom: -130px;
+    background: #0e5dae;
+    width: 200px;
+    z-index: 1;
+    padding: 10px;
+}
 
+#dropdownMenuLink {
+    transition: 0.5s all ease-in-out;
+}
+
+    #dropdownMenuLink:hover .show-item {
+        display: block !important;
+    }
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
     color: #fff;
     background-color: #1b6ec2;

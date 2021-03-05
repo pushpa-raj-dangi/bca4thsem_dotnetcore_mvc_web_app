@@ -5,13 +5,21 @@
 }
 
     <div class="container text-center">
-        <form class="col-md-5 offset-3" asp-controller="Categories" asp-action="DeleteConfirm" method="post">
-            <h3>Are you sure to delete <span class="text-primary">@Model.Name</span> ?</h3>
-            <input type="hidden" name="Id" value="@Model.Id" />
-            <div class="my-5"></div>
-            <a asp-action="Index" class="btn btn-primary" asp-controller="Categories">❎ Cancel</a>
-            <button type="submit" class="btn btn-danger">✅ Delete</button>
-            <div class="my-5"></div>
-        </form>
+        <div class="row">
+            <div class="col-md-3">
+                <partial name="_SideNav" />
+            </div>
+            <div class="col-md-9">
+                <form class="col-md-5 offset-3" asp-controller="Categories" asp-action="DeleteConfirm" method="post">
+                    <h3>Are you sure to delete <span class="text-primary">@Model.Name</span> ?</h3>
+                    <input type="hidden" name="Id" value="@Model.Id" />
+                    <div class="my-5"></div>
+                    <a asp-action="Index" class="btn btn-primary" asp-controller="Categories">❎ Cancel</a>
+                    <button type="submit" class="btn btn-danger">✅ Delete</button>
+                    <div class="my-5"></div>
+                </form>
+            </div>
+        </div>
+        
     </div>
 
