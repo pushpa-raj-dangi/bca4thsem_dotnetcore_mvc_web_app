@@ -10,7 +10,7 @@
             <div class="col-md-3">
                 <partial name="_SideNav"/>
             </div>
-            <div class="col-md-9">
+            <div class="col-md-9 cr">
                 <h1>Create New Post</h1>
 
                 <div class="container my-5">
@@ -23,25 +23,33 @@
                             <label asp-for="Content" class="form-label"></label>
                             <textarea class="form-control" asp-for="Content"></textarea>
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label  w-100">Categories</label>
-                            <select multiple name="SelectedCategoryIds" id="SelectedCategoryIds" asp-items="@(new SelectList(Model.Categories,"Id","Name"))" class="form-control w-100"></select>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label w-100">Tags</label>
-                            <select multiple name="SelectedTagIds" id="SelectedTagIds" asp-items="@(new SelectList(Model.Tags,"Id","Name"))" class="form-control w-100"></select>
-                        </div>
-                        <div class="mb-3">
-                            <label asp-for="PostStatus" class="form-label"></label>
-                            <select asp-for="PostStatus" asp-items="Html.GetEnumSelectList<PostStatus>()" class="form-control"></select>
-                        </div>
-                        <div class="custom-file">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label class="form-label  w-100">Categories</label>
+                                    <select multiple name="SelectedCategoryIds" id="SelectedCategoryIds" asp-items="@(new SelectList(Model.Categories,"Id","Name"))" class="form-control w-100"></select>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label w-100">Tags</label>
+                                    <select multiple name="SelectedTagIds" id="SelectedTagIds" asp-items="@(new SelectList(Model.Tags,"Id","Name"))" class="form-control w-100"></select>
+                                </div>
+                                <div class="mb-3">
+                                    <label asp-for="PostStatus" class="form-label"></label>
+                                    <select asp-for="PostStatus" asp-items="Html.GetEnumSelectList<PostStatus>()" class="form-control"></select>
+                                </div>
+                                <button type="submit" class="btn mt-3 btn-lg btn-primary">Create New Post</button>
 
-                            <input type="file" asp-for="Picture" class="custom-file-input" />
-                            <label class="custom-file-label"> Choose Photo</label>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="upload-img p-4">
+                                    <img id="editimg" src="~/uploads/placeholder.png" />
+                                    <input id="myimg" type="file" asp-for="Post.Picture" class="custom-in" />
+                                </div>
+                            </div>
+
                         </div>
-                        <br />
-                        <button type="submit" class="btn mt-3 btn-lg btn-primary">Create New Post</button>
+                       
+                        
                     </form>
                 </div>
 

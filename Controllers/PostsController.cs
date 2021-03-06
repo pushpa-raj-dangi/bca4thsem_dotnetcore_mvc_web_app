@@ -109,8 +109,11 @@ namespace NewsWebApp.Controllers
                 Posts = _context.Posts.ToList(),
                 Post = _context.Posts.Find(id)
             };
+            if (viewModel.Post == null)
+                return View("NotFound");
             return View(viewModel);
         }
+
         [HttpPost]
         public IActionResult Edit(PostCreateViewModel newspost, int[] SelectedCategoryIds, int[] SelectedTagIds)
         {
@@ -172,9 +175,11 @@ namespace NewsWebApp.Controllers
         public IActionResult Details(int id)
         {
             var post = _context.Posts.Include(p => p.PostCategories).ThenInclude(c => c.Category).Include(tag => tag.PostTags).ThenInclude(pt => pt.Tag).FirstOrDefault(p => p.Id == id);
+            if (post == null)
+                return View("NotFound");
             var p = post.PostCategories.Select(p => p.CategoryId);
             ViewData["relatedPost"] = _context.Posts.Where(p => p.PostCategories.Any(pc => pc.CategoryId == p.Id)).ToList();
-
+            ViewData["latest"] = _context.Posts.Include(p => p.PostCategories).ThenInclude(c => c.Category).Include(tag => tag.PostTags).ThenInclude(pt => pt.Tag).ToList().OrderByDescending(n=>n.CreatedDate);
             return View(post);
         }
 
@@ -187,7 +192,7 @@ namespace NewsWebApp.Controllers
             if (post.Count == 0)
             {
                 Response.StatusCode = 404;
-                return View("NotFound",id);
+                return View("NotFound", id);
             }
             ViewData["category"] = _context.Categories.SingleOrDefault(p => p.Id == id).Name;
             return View(post);
@@ -200,7 +205,7 @@ namespace NewsWebApp.Controllers
             var post = _context.Posts.Where(p => p.PostTags.Any(pc => pc.TagId == id)).OrderByDescending(p => p.CreatedDate).ToList();
 
             if (post.Count == 0)
-                return View("NotFound",id);
+                return View("NotFound", id);
             ViewData["tag"] = _context.Tags.FirstOrDefault(p => p.Id == id).Name;
             return View(post);
         }
@@ -209,10 +214,21 @@ namespace NewsWebApp.Controllers
         public IActionResult Delete(int id)
         {
             var post = _context.Posts.Include(p => p.PostCategories).ThenInclude(c => c.Category).Include(tag => tag.PostTags).ThenInclude(pt => pt.Tag).FirstOrDefault(p => p.Id == id);
+
+            if (post == null)
+                return View("NotFound");
             var p = post.PostCategories.Select(p => p.CategoryId);
-
-
             return View(post);
+        }
+
+        public IActionResult DeleteConfirm(int id)
+        {
+            var post = _context.Posts.Find(id);
+            if (post == null)
+                return RedirectToAction(nameof(Index));
+            _context.Remove(post);
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Index));
         }
 
 

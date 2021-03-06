@@ -3,18 +3,16 @@
 @inject UserManager<AppUser> UserManager
 
 
-@{
-    var image = UserManager.Users.FirstOrDefault(m => m.UserName == User.Identity.Name).ProfileImg;
-}
+
 <ul class="navbar-nav align-items-center">
     @if (SignInManager.IsSignedIn(User))
     {
 
         <li class="nav-item dropdown" id="dropdownMenuLink">
             <a class="nav-link text-dark" style="font-size:14px !important">
-                @if (image != null)
+                @if (UserManager.Users.FirstOrDefault(m => m.UserName == User.Identity.Name).ProfileImg != null)
                 {
-                    <img class="avatar" src="~/uploads/@image" alt="Alternate Text" />
+                    <img class="avatar" src="~/uploads/@UserManager.Users.FirstOrDefault(m => m.UserName == User.Identity.Name).ProfileImg" alt="Alternate Text" />
                 }
                 else
                 {

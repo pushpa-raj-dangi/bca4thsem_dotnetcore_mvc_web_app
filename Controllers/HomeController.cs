@@ -34,7 +34,7 @@ namespace NewsWebApp.Controllers
 
             var homeViewModel = new HomeViewModel
             {
-                PoliticsNews = _context.Posts.Where(p => p.PostCategories.Any(pc => pc.CategoryId == 5)).ToList().Take(3),
+                PoliticsNews = _context.Posts.Where(p => p.PostCategories.Any(pc => pc.CategoryId == 5)).ToList().Take(3).Where(p=>p.PostStatus == PostStatus.Publish),
 
                 LatestUpdate = _context.Posts.Include(p => p.PostCategories).ThenInclude(c => c.Category).Include(tag => tag.PostTags).ThenInclude(pt => pt.Tag).Take(3).OrderByDescending(p=>p.Id),
                 Categories = _context.Categories.ToList()

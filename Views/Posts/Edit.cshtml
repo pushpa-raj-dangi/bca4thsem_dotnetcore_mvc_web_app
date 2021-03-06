@@ -8,44 +8,53 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3">
-            
+            <partial name="_SideNav" />
         </div>
-        <div class="col-md-3"></div>
+        <div class="col-md-9">
+            <h1>Edit Post</h1>
+
+            <div class="container my-5">
+                <form asp-controller="Posts" enctype="multipart/form-data" asp-action="Create" method="post">
+                    <div class="mb-3">
+                        <label asp-for="Post.Name" class="form-label"></label>
+                        <input class="form-control" placeholder="Title" asp-for="Post.Name">
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Post.Content" class="form-label"></label>
+                        <textarea class="form-control" asp-for="Post.Content"></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label class="form-label  w-100">Categories</label>
+                                <select multiple name="SelectedCategoryIds" id="SelectedCategoryIds" asp-items="@(new SelectList(Model.Categories,"Id","Name"))" class="form-control w-100" style="width:100%"></select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label w-100">Tags</label>
+                                <select multiple name="SelectedTagIds" id="SelectedTagIds" asp-items="@(new SelectList(Model.Tags,"Id","Name"))" class="form-control w-100"></select>
+                            </div>
+                            <div class="mb-3">
+                                <label asp-for="Post.PostStatus" class="form-label"></label>
+                                <select asp-for="Post.PostStatus" asp-items="Html.GetEnumSelectList<PostStatus>()" class="form-control"></select>
+                            </div>
+                            <button type="submit" class="btn mt-3 btn-lg btn-primary">Update</button>
+
+                        </div>
+                        <div class="col-md-8">
+                            <div class="upload-img p-4">
+                                <img id="editimg"  src="~/uploads/@Model.Post.Picture" />
+                                <input id="myimg" type="file" asp-for="Post.Picture" class="custom-in" />
+                            </div>
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
 
     </div>
-    <h1>Edit Post</h1>
 
-    <div class="container my-5">
-        <form asp-controller="Posts" enctype="multipart/form-data" asp-action="Create" method="post">
-            <div class="mb-3">
-                <label asp-for="Post.Name" class="form-label"></label>
-                <input class="form-control" placeholder="Title" asp-for="Post.Name">
-            </div>
-            <div class="mb-3">
-                <label asp-for="Post.Content" class="form-label"></label>
-                <textarea class="form-control" asp-for="Post.Content"></textarea>
-            </div>
-            <div class="mb-3">
-                <label class="form-label  w-100">Categories</label>
-                <select multiple name="SelectedCategoryIds" id="SelectedCategoryIds" asp-items="@(new SelectList(Model.Categories,"Id","Name"))" class="form-control w-100"></select>
-            </div>
-            <div class="mb-3">
-                <label class="form-label w-100">Tags</label>
-                <select multiple name="SelectedTagIds" id="SelectedTagIds" asp-items="@(new SelectList(Model.Tags,"Id","Name"))" class="form-control w-100"></select>
-            </div>
-            <div class="mb-3">
-                <label asp-for="Post.PostStatus" class="form-label"></label>
-                <select asp-for="Post.PostStatus" asp-items="Html.GetEnumSelectList<PostStatus>()" class="form-control"></select>
-            </div>
-            <div class="custom-file">
-
-                <input type="file" asp-for="Post.Picture" class="custom-file-input" />
-                <label class="custom-file-label"> Choose Photo</label>
-            </div>
-            <br />
-            <button type="submit" class="btn mt-3 btn-lg btn-primary">Create New Post</button>
-        </form>
-    </div>
 
 </div>
 

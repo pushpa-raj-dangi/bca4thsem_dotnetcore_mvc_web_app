@@ -35,6 +35,22 @@ $(function() {
         readURL(this);
     });
 
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                $('#editimg').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]); // convert to base64 string
+        }
+    }
+
+    $("#myimg").change(function() {
+        readURL(this);
+    });
+
     $(".dropdown").hover(function() {
         var dropdownMenu = $(this).children(".dropdown-menu");
         if (dropdownMenu.is(":visible")) {

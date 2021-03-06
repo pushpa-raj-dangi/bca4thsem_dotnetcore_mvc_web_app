@@ -78,14 +78,20 @@ a {
     cursor: pointer;
     position: absolute;
 }
+
 .action-link > a {
     color: blue !important;
     font-size: 12px;
     font-weight: bold;
 }
+
 .my-header {
     /*background: #0e5dae;*/
     color: #fff;
+}
+
+.btn-group, .btn-group-vertical {
+    width: 100%;
 }
 
 .cat-title {
@@ -100,6 +106,48 @@ a {
     margin-bottom: 20px;
     text-transform: uppercase;
     letter-spacing: 1.4px;
+}
+
+.custom-in {
+    position: absolute;
+    left: 0;
+    right: 0;
+    text-align: center;
+    margin: auto;
+    top: 45%;
+    height: 85px;
+    width: 160px;
+    background: red;
+    opacity: 1;
+}
+
+    .custom-in:before {
+        content: "Change Photo";
+        background: #102be9;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        opacity: 1;
+        align-items: center;
+        justify-content: center;
+        top: 0px;
+        left: 0;
+        border: 3px dashed #ffffff;
+        font-size: 18px;
+        color: #ffffff !important;
+        padding: 28px 10px;
+        margin: auto;
+        font-weight: 800;
+    }
+
+.custom-img img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover; 
+}
+
+.cr .custom-in:before {
+    content: "Upload Photo"
 }
 
 .latest img {
@@ -342,6 +390,7 @@ a.navbar-brand {
     background-color: #1b6ec2;
     border-color: #1861ac;
 }
+
 .custom-drop {
     background: #0e5dae !important;
 }
@@ -396,5 +445,5 @@ body {
     position: relative;
     white-space: nowrap;
     line-height: 60px;
-    overflow:hidden;
+    overflow: hidden;
 }

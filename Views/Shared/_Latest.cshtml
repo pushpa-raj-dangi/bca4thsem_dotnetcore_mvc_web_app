@@ -1,3 +1,24 @@
-﻿
-<h1>Latest</h1>
-@Model.Name
+﻿@model IEnumerable<Post>
+<div class="card custom-img shadow-sm rounded-0">
+    <h4 class="card shadow-sm bg-primary text-light rounded-0 p-3">Latest Update News</h4>
+   
+    @foreach (var post in Model)
+    {
+        <div class="media p-2">
+            @if (post.Picture != null)
+            {
+
+                <img  class="mr-3" src="~/uploads/@post.Picture" alt="Generic placeholder image">
+            }
+            else
+            {
+                <img class="mr-3" src="~/uploads/placeholder.png" alt="Generic placeholder image">
+
+            }
+            <div class="media-body">
+                <h5 class="mt-0">@post.Name.Substring(0,14)</h5>
+                @string.Join(", ", post.PostTags.Select(p => p.Tag.Name))
+            </div>
+        </div>
+    }
+</div>

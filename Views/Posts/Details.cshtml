@@ -3,6 +3,8 @@
     ViewData["Title"] = Model.Name;
     Layout = "~/Views/Shared/_Layout.cshtml";
     var posts = ViewData["relatedPost"] as IEnumerable<Post>;
+    var latest = ViewData["latest"] as IEnumerable<Post>;
+
 
 }
 
@@ -12,7 +14,8 @@
             <div class="shadow-sm p-3">
                 <h3 class="my-5">@Model.Name</h3>
                 <hr />
-                <div class="time text-dark">Published On 
+                <div class="time text-dark">
+                    Published On
                     <i class="fas fa-clock"></i> @Model.CreatedDate.ToString("dddd, dd MMMM yyyy")
                 </div>
                 <hr />
@@ -46,8 +49,7 @@
             </div>
         </div>
         <div class="col-md-4">
-            @await Html.PartialAsync("_Latest")
-            <partial name="_Latest" />
+            <partial name="_Latest" model="latest" />
         </div>
 
         <div class="col-md-12 my-4">
