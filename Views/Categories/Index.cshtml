@@ -1,6 +1,6 @@
 ﻿@model NewsWebApp.ViewModels.CategoryViewModel
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "All Categories";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="container">
@@ -14,9 +14,9 @@
                 <div class="col-md-4">
                     <form asp-controller="categories" asp-action="Create" method="post">
 
-                        @Html.LabelFor(c => c.Category.Name)
+                        @*@Html.LabelFor(c => c.Category.Name)*@
                         @*@Html.TextBoxFor(c => c.Category.Name, new { @class = "form-control" })*@
-                        <input type="text" asp-for="Category.Name" class="form-control my-3" />
+                        <input type="text" asp-for="Category.Name" placeholder="Name" class="form-control my-3" />
                         @Html.HiddenFor(c => c.Category.Id)
 
                         <button type="submit" class="btn btn-primary">Create New Category</button>

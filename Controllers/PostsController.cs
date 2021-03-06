@@ -28,7 +28,7 @@ namespace NewsWebApp.Controllers
         {
             var post = _context.Posts.Include(p => p.PostCategories).ThenInclude(c => c.Category).Include(tag => tag.PostTags).ThenInclude(pt => pt.Tag)
                .OrderByDescending(p => p.Id);
-        
+
             return View(post);
         }
 
@@ -194,8 +194,10 @@ namespace NewsWebApp.Controllers
         {
 
             var post = _context.Posts.Where(p => p.PostTags.Any(pc => pc.TagId == id)).OrderByDescending(p => p.CreatedDate).ToList();
-            ViewData["tag"] = _context.Tags.SingleOrDefault(p => p.Id == id).Name;
-
+            var tag = _context.Tags.FirstOrDefault(p => p.Id == id).Name;
+            ViewData["tag"] = tag;
+            if (tag == null)
+                return NotFound();
             return View(post);
         }
 
@@ -204,7 +206,7 @@ namespace NewsWebApp.Controllers
         {
             var post = _context.Posts.Include(p => p.PostCategories).ThenInclude(c => c.Category).Include(tag => tag.PostTags).ThenInclude(pt => pt.Tag).FirstOrDefault(p => p.Id == id);
             var p = post.PostCategories.Select(p => p.CategoryId);
-           
+
 
             return View(post);
         }

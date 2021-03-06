@@ -1,22 +1,24 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
 
 
-
+@{ 
+    var image = UserManager.Users.FirstOrDefault(m => m.UserName == User.Identity.Name).ProfileImg;
+}
 <ul class="navbar-nav align-items-center">
     @if (SignInManager.IsSignedIn(User))
     {
 
         <li class="nav-item" id="dropdownMenuLink">
             <a class="nav-link text-dark" style="font-size:14px !important">
-                <img class="avatar" src="~/uploads/user.png" alt="Alternate Text" />
 
+                <img class="avatar" src="/uploads/@image" alt="Alternate Text" />
                 @User.Identity.Name.Substring(0, 11)
             </a>
             <div class="show-item">
                 <a class="nav-link" asp-controller="Posts" asp-action="Index" title="Manage">
-                 Dashboard
+                    Dashboard
                 </a>
                 <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
                     My Account

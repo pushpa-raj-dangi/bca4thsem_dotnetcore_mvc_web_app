@@ -1,6 +1,6 @@
 ﻿@model NewsWebApp.ViewModels.TagViewModel
 @{
-    ViewData["Title"] = "Tags";
+    ViewData["Title"] = "All Tags";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="container">
@@ -24,14 +24,14 @@
                 <div class="col-md-6">
                     <div><input type="text" id="tag" class="form-control my-3 col-6 offset-6" placeholder="Search Category" /></div>
                     <table class="table table-hover table-striped">
-                        <tr class="bg-light">
+                        <tr class="bg-light" style="height:65px">
                             <th>Name</th>
                             <th>Slug</th>
                         </tr>
                         <tbody id="tagTable">
                             @foreach (var tag in Model.Tags)
                             {
-                                <tr>
+                                <tr style="height:25px">
                                     <td class="action-table">
                                         @tag.Name
                                         <span class="action-link">

@@ -16,6 +16,8 @@
     <Compile Remove="Migrations\20210228145236_ApplyHtmlConstraintPost.Designer.cs" />
     <Compile Remove="Migrations\20210228145424_ApplyAnotation.cs" />
     <Compile Remove="Migrations\20210228145424_ApplyAnotation.Designer.cs" />
+    <Compile Remove="Migrations\20210305160203_AddedProfileImageInAppUserTable.cs" />
+    <Compile Remove="Migrations\20210305160203_AddedProfileImageInAppUserTable.Designer.cs" />
   </ItemGroup>
 
 

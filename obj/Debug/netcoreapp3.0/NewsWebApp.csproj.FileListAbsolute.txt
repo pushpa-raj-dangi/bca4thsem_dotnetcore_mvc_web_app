@@ -806,3 +806,5 @@ D:\bca4thsem_dotnetcore_mvc_web_app\obj\Debug\netcoreapp3.0\NewsWebApp.dll
 D:\bca4thsem_dotnetcore_mvc_web_app\obj\Debug\netcoreapp3.0\NewsWebApp.pdb
 D:\bca4thsem_dotnetcore_mvc_web_app\obj\Debug\netcoreapp3.0\NewsWebApp.genruntimeconfig.cache
 D:\bca4thsem_dotnetcore_mvc_web_app\obj\Debug\netcoreapp3.0\Razor\Views\Posts\Delete.cshtml.g.cs
+D:\4thsem\NewsWebApp\obj\Debug\netcoreapp3.0\Razor\Views\Posts\Delete.cshtml.g.cs
+D:\4thsem\NewsWebApp\obj\Debug\netcoreapp3.0\Razor\Views\Users\Index.cshtml.g.cs
