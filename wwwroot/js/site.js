@@ -3,7 +3,7 @@
 
 // Write your JavaScript code.
 
-$(function () {
+$(function() {
     $("#SelectedTagIds").multiselect({
         includeSelectAllOption: true,
     })
@@ -13,41 +13,38 @@ $(function () {
 
 
     tinyMCE.init({
-       
+
         mode: "textareas"
     });
     $("#wrap").wrap("<div class='container-fluid'></div>");
 
 
-    $("#input").on("keyup", function () {
-        var value = $(this).val().toLowerCase();
-        $("#table tr").filter(function () {
-            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-        });
-    });
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
 
-    $("#tag").on("keyup", function () {
-        var value = $(this).val().toLowerCase();
-        $("#tagTable tr").filter(function () {
-            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-        });
-    });
+            reader.onload = function(e) {
+                $('#blah').attr('src', e.target.result);
+            }
 
-function readURL(input) {
-  if (input.files && input.files[0]) {
-    var reader = new FileReader();
-    
-    reader.onload = function(e) {
-      $('#blah').attr('src', e.target.result);
+            reader.readAsDataURL(input.files[0]); // convert to base64 string
+        }
     }
-    
-    reader.readAsDataURL(input.files[0]); // convert to base64 string
-  }
-}
 
-$("#imgInp").change(function() {
-  readURL(this);
-});
+    $("#imgInp").change(function() {
+        readURL(this);
+    });
+
+    $(".dropdown").hover(function() {
+        var dropdownMenu = $(this).children(".dropdown-menu");
+        if (dropdownMenu.is(":visible")) {
+            dropdownMenu.parent().toggleClass("open");
+        }
+    });
+
+    $('#postTable').DataTable();
+    $('#cat').DataTable();
+    $('#tag').DataTable();
 
 });
 

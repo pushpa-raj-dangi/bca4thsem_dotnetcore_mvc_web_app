@@ -180,12 +180,16 @@ namespace NewsWebApp.Controllers
 
 
 
-        public IActionResult PostByCat(int id)
+        public IActionResult PostByCat(int? id)
         {
             var post = _context.Posts.Where(p => p.PostCategories.Any(pc => pc.CategoryId == id)).OrderByDescending(p => p.CreatedDate).ToList();
-            var cat = _context.Categories.SingleOrDefault(p => p.Id == id).Name;
 
-            ViewData["category"] = cat;
+            if (post.Count == 0)
+            {
+                Response.StatusCode = 404;
+                return View("NotFound",id);
+            }
+            ViewData["category"] = _context.Categories.SingleOrDefault(p => p.Id == id).Name;
             return View(post);
         }
 
@@ -194,10 +198,10 @@ namespace NewsWebApp.Controllers
         {
 
             var post = _context.Posts.Where(p => p.PostTags.Any(pc => pc.TagId == id)).OrderByDescending(p => p.CreatedDate).ToList();
-            var tag = _context.Tags.FirstOrDefault(p => p.Id == id).Name;
-            ViewData["tag"] = tag;
-            if (tag == null)
-                return NotFound();
+
+            if (post.Count == 0)
+                return View("NotFound",id);
+            ViewData["tag"] = _context.Tags.FirstOrDefault(p => p.Id == id).Name;
             return View(post);
         }
 

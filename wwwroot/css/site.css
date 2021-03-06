@@ -78,7 +78,11 @@ a {
     cursor: pointer;
     position: absolute;
 }
-
+.action-link > a {
+    color: blue !important;
+    font-size: 12px;
+    font-weight: bold;
+}
 .my-header {
     /*background: #0e5dae;*/
     color: #fff;
@@ -325,31 +329,22 @@ a.navbar-brand {
     border-color: #1861ac;
 }
 
-.show-item {
-    visibility: hidden;
-    color: #fff;
-    position: absolute;
-    bottom: -130px;
-    background: #0e5dae;
-    width: 200px;
-    z-index: 1;
-    padding: 10px;
+.dropdown:hover .dropdown-menu {
+    display: block;
 }
 
-#dropdownMenuLink {
-    transition: 0.5s all ease-in-out;
+.dropdown-menu {
+    margin-top: 0;
 }
-
-    #dropdownMenuLink:hover .show-item {
-        visibility: visible;
-    }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
     color: #fff;
     background-color: #1b6ec2;
     border-color: #1861ac;
 }
-
+.custom-drop {
+    background: #0e5dae !important;
+}
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
@@ -394,6 +389,12 @@ body {
     padding: 40px 0px;
     background: #f1f1f1;
     width: 100%;
-    white-space: nowrap;
     line-height: 45px; /* Vertically center the text there */
+}
+
+.footer {
+    position: relative;
+    white-space: nowrap;
+    line-height: 60px;
+    overflow:hidden;
 }

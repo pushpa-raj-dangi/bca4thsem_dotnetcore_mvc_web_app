@@ -3,20 +3,27 @@
 @inject UserManager<AppUser> UserManager
 
 
-@{ 
+@{
     var image = UserManager.Users.FirstOrDefault(m => m.UserName == User.Identity.Name).ProfileImg;
 }
 <ul class="navbar-nav align-items-center">
     @if (SignInManager.IsSignedIn(User))
     {
 
-        <li class="nav-item" id="dropdownMenuLink">
+        <li class="nav-item dropdown" id="dropdownMenuLink">
             <a class="nav-link text-dark" style="font-size:14px !important">
+                @if (image != null)
+                {
+                    <img class="avatar" src="~/uploads/@image" alt="Alternate Text" />
+                }
+                else
+                {
 
-                <img class="avatar" src="/uploads/@image" alt="Alternate Text" />
+                    <img class="avatar" src="~/uploads/user.png" alt="Alternate Text" />
+                }
                 @User.Identity.Name.Substring(0, 11)
             </a>
-            <div class="show-item">
+            <div class="dropdown-menu custom-drop">
                 <a class="nav-link" asp-controller="Posts" asp-action="Index" title="Manage">
                     Dashboard
                 </a>

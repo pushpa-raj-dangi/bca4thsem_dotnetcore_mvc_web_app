@@ -39,6 +39,8 @@ namespace NewsWebApp.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+            public string ProfileImg { get; set; }
+
         }
 
         private async Task LoadAsync(AppUser user)
@@ -83,6 +85,7 @@ namespace NewsWebApp.Areas.Identity.Pages.Account.Manage
             }
 
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            Input.ProfileImg = ProfileImg;
             if (Input.PhoneNumber != phoneNumber)
             {
                 var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);

@@ -5,7 +5,7 @@
     ViewData["ActivePage"] = ManageNavPages.Index;
 }
 
-<h4>@ViewData["Title"]</h4>
+<h4>Edit @ViewData["Title"]</h4>
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 <div class="row">
     <div class="col-md-6">
@@ -17,7 +17,16 @@
                 <input asp-for="Username" class="form-control" disabled />
             </div>
             <div class="form-group">
-                <img src="~/uploads/@Model.ProfileImg" style="width:330px" alt="Alternate Text" />
+                
+                <div class="input-group mb-3">
+                        <img src="~/uploads/@Model.ProfileImg" style="width:330px" alt="Alternate Text" />
+                    <div class="custom-file">
+
+                        <input asp-for="Input.ProfileImg"  type="file" class="custom-file-input" id="inputGroupFile02">
+                        <label class="custom-file-label" for="inputGroupFile02">Choose Photo</label>
+                    </div>
+                </div>
+                
             </div>
             <div class="form-group">
                 <label asp-for="Input.PhoneNumber"></label>

@@ -198,8 +198,6 @@ C:\Users\Dell\Desktop\NewsWebApp\obj\Debug\netcoreapp3.0\Razor\Views\Shared\_Nav
 C:\Users\Dell\Desktop\NewsWebApp\obj\Debug\netcoreapp3.0\Razor\Views\Shared\_Latest.cshtml.g.cs
 D:\4thsem\NewsWebApp\obj\Debug\netcoreapp3.0\staticwebassets\NewsWebApp.StaticWebAssets.Manifest.cache
 D:\4thsem\NewsWebApp\obj\Debug\netcoreapp3.0\staticwebassets\NewsWebApp.StaticWebAssets.xml
-D:\4thsem\NewsWebApp\obj\Debug\netcoreapp3.0\NewsWebApp.MvcApplicationPartsAssemblyInfo.cs
-D:\4thsem\NewsWebApp\obj\Debug\netcoreapp3.0\NewsWebApp.MvcApplicationPartsAssemblyInfo.cache
 D:\4thsem\NewsWebApp\obj\Debug\netcoreapp3.0\NewsWebApp.RazorAssemblyInfo.cache
 D:\4thsem\NewsWebApp\obj\Debug\netcoreapp3.0\NewsWebApp.RazorAssemblyInfo.cs
 D:\4thsem\NewsWebApp\obj\Debug\netcoreapp3.0\NewsWebApp.AssemblyInfoInputs.cache
@@ -808,3 +806,6 @@ D:\bca4thsem_dotnetcore_mvc_web_app\obj\Debug\netcoreapp3.0\NewsWebApp.genruntim
 D:\bca4thsem_dotnetcore_mvc_web_app\obj\Debug\netcoreapp3.0\Razor\Views\Posts\Delete.cshtml.g.cs
 D:\4thsem\NewsWebApp\obj\Debug\netcoreapp3.0\Razor\Views\Posts\Delete.cshtml.g.cs
 D:\4thsem\NewsWebApp\obj\Debug\netcoreapp3.0\Razor\Views\Users\Index.cshtml.g.cs
+D:\4thsem\NewsWebApp\obj\Debug\netcoreapp3.0\Razor\Views\Posts\NotFound.cshtml.g.cs
+D:\4thsem\NewsWebApp\obj\Debug\netcoreapp3.0\NewsWebApp.MvcApplicationPartsAssemblyInfo.cs
+D:\4thsem\NewsWebApp\obj\Debug\netcoreapp3.0\NewsWebApp.MvcApplicationPartsAssemblyInfo.cache

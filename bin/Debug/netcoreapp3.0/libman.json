@@ -13,6 +13,14 @@
     {
       "library": "bootstrap-multiselect@0.9.16",
       "destination": "wwwroot/bootstrap-multiselect/"
+    },
+    {
+      "library": "datatables@1.10.21",
+      "destination": "wwwroot/datatables/"
+    },
+    {
+      "library": "datatables@1.10.21",
+      "destination": "wwwroot/lib/datatables/"
     }
   ]
 }

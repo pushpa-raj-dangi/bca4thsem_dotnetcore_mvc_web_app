@@ -6,13 +6,13 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3">
-            <partial name="_SideNav"/>
+            <partial name="_SideNav" />
         </div>
         <div class="col-md-9">
             <h1>Tags</h1>
 
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-5">
 
                     <form asp-controller="tags" asp-action="Create" method="post">
                         @Html.LabelFor(c => c.Tag.Name)
@@ -21,13 +21,16 @@
                         <button type="submit" class="btn btn-primary">Create New Tag</button>
                     </form>
                 </div>
-                <div class="col-md-6">
-                    <div><input type="text" id="tag" class="form-control my-3 col-6 offset-6" placeholder="Search Category" /></div>
-                    <table class="table table-hover table-striped">
-                        <tr class="bg-light" style="height:65px">
-                            <th>Name</th>
-                            <th>Slug</th>
-                        </tr>
+                <div class="col-md-7">
+
+                    <table class="table table-borderd" id="tag">
+                        <thead>
+                            <tr class="bg-light" style="height:65px">
+                                <th>Name</th>
+                                <th>Slug</th>
+                            </tr>
+                        </thead>
+
                         <tbody id="tagTable">
                             @foreach (var tag in Model.Tags)
                             {
@@ -51,7 +54,7 @@
             </div>
         </div>
     </div>
-    
+
 </div>
 
 
