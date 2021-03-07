@@ -7,13 +7,13 @@ $(function() {
     $("#SelectedTagIds").multiselect({
         includeSelectAllOption: true,
     })
+
     $("#SelectedCategoryIds").multiselect({
         includeSelectAllOption: true,
     });
-
+    $("")
 
     tinyMCE.init({
-
         mode: "textareas"
     });
     $("#wrap").wrap("<div class='container-fluid'></div>");
