@@ -11,7 +11,7 @@ $(function() {
     $("#SelectedCategoryIds").multiselect({
         includeSelectAllOption: true,
     });
-    $("")
+    $(".s2").select2();
 
     tinyMCE.init({
         mode: "textareas"
