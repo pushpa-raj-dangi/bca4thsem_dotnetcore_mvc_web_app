@@ -22,10 +22,14 @@ namespace NewsWebApp.Controllers
         {
 
             var users = _userManager.Users.ToList();
-
-
-            ViewData["users"] = users;
             return View(users);
+        }
+
+        public IActionResult Edit(string id)
+        {
+
+            var user = _userManager.Users.FirstOrDefault(u=>u.Id==id);
+            return View(user);
         }
     }
 }

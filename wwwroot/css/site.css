@@ -143,8 +143,38 @@ a {
 .custom-img img {
     width: 60px;
     height: 60px;
-    object-fit: cover; 
+    object-fit: cover;
 }
+
+#profileHolder {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+
+#profileImage {
+    background: #d8d2dd;
+    width: 145px;
+    margin: auto;
+    position: relative;
+    opacity: 1;
+}
+
+    #profileImage:before {
+        content: "Upload";
+        position: absolute;
+        left: 0;
+        right: 0;
+        background: #1916c0;
+        color: #fff;
+        text-align: center;
+        padding: 5px;
+        top: 0;
+        bottom: 0;
+    }
 
 .cr .custom-in:before {
     content: "Upload Photo"

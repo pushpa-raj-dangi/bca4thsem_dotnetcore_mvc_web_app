@@ -16,8 +16,10 @@
 
             }
             <div class="media-body">
-                <h5 class="mt-0">@post.Name.Substring(0,14)</h5>
-                @string.Join(", ", post.PostTags.Select(p => p.Tag.Name))
+                <h6 class="mt-0">@post.Name</h6>
+                <div class="time">
+                    <i class="fas fa-clock"></i>  @post.CreatedDate.ToString("dddd, dd MMMM yyyy")
+                </div>
             </div>
         </div>
     }
