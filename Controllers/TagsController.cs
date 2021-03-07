@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NewsWebApp.Data;
@@ -48,6 +49,23 @@ namespace NewsWebApp.Controllers
             if (tag == null)
                 return NotFound();
             return View("Edit",tag);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Tag tag)
+        {
+            var rand = new Random();
+            var slug = SlugHelper.GenerateSlug(tag.Name);
+            while ( _context.Tags.Any(t => t.Slug == slug))
+            {
+                slug += rand.Next(1000, 9999);
+            }
+            tag.Slug = slug;
+            if (!ModelState.IsValid)
+                return View();
+            _context.Update(tag);
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpGet]

@@ -43,15 +43,26 @@ namespace NewsWebApp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-
-
-
+        [HttpPost]
+        public IActionResult Edit(Category cat)
+        {
+            var rand = new Random();
+            var slug = SlugHelper.GenerateSlug(cat.Name);
+            while (_context.Tags.Any(t => t.Slug == slug))
+            {
+                slug += rand.Next(1000, 9999);
+            }
+            cat.Slug = slug;
+            if (!ModelState.IsValid)
+                return View();
+            _context.Update(cat);
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
 
 
         public IActionResult Edit(int id)
         {
-
-
             var categories = _context.Categories.SingleOrDefault(c => c.Id == id);
 
             if (categories == null)
