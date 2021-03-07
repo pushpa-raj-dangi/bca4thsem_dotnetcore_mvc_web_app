@@ -109,6 +109,7 @@ namespace NewsWebApp.Controllers
                 Posts = _context.Posts.ToList(),
                 Post = _context.Posts.Find(id)
             };
+            ViewData["categories"] = _context.Categories.ToList();
             if (viewModel.Post == null)
                 return View("NotFound");
             return View(viewModel);
@@ -132,7 +133,7 @@ namespace NewsWebApp.Controllers
             var rand = new Random();
             var slug = SlugHelper.GenerateSlug(newspost.Name);
             while (_context.Posts.Any(t => t.Slug == slug))
-            {
+            {   
                 slug += rand.Next(1000, 9999);
             }
             newspost.Slug = slug;
@@ -164,7 +165,7 @@ namespace NewsWebApp.Controllers
                 PostTags = newspost.PostTags,
                 Slug = newspost.Slug
             };
-            _context.Add(postModel);
+            _context.Update(postModel);
             _context.SaveChanges();
 
             return RedirectToAction(nameof(Index));
