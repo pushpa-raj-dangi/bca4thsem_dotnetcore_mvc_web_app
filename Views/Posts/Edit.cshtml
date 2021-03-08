@@ -1,9 +1,10 @@
-﻿@model NewsWebApp.ViewModels.PostViewModel
+﻿@model NewsWebApp.ViewModels.PostCreateViewModel
 @{
     ViewData["Title"] = "Edit " + Model.Post.Name;
     Layout = "~/Views/Shared/_Layout.cshtml";
     var categories = ViewData["categories"] as IEnumerable<Category>;
-    var selected = Model.Post.PostCategories.Select(pc => pc.CategoryId).ToList();
+    var selectedCat = Model.Post.PostCategories.Select(pc => pc.CategoryId).ToList();
+    var selectedTag = Model.Post.PostTags.Select(pt => pt.TagId).ToList();
 }
 
 <div class="container">
@@ -15,7 +16,7 @@
             <h1>Edit Post</h1>
 
             <div class="container my-5">
-                <form asp-controller="Posts" enctype="multipart/form-data" asp-action="Create" method="post">
+                <form asp-controller="Posts" enctype="multipart/form-data" asp-action="Edit" method="post">
                     <div class="mb-3">
                         <label asp-for="Post.Name" class="form-label"></label>
                         <input class="form-control" placeholder="Title" asp-for="Post.Name">
@@ -28,12 +29,11 @@
                         <div class="col-md-4">
                             <div class="mb-3">
                                 <label class="form-label  w-100">Categories</label>
-                                <select multiple name="SelectedCategoryIds" id="SelectedTagIds" asp-items="@(new MultiSelectList(Model.Tags,"Id","Name",selected))" class="form-control"></select>
-
+                                <select multiple name="SelectedCategoryIds" id="SelectedTagIds" asp-items="@(new MultiSelectList(Model.Categories,"Id","Name",selectedCat))" class="s2 form-control"></select>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label w-100">Tags</label>
-                                <select multiple name="SelectedTagIds" id="SelectedTagIds" asp-items="@(new SelectList(Model.Tags,"Id","Name"))" class="s2 form-control w-100"></select>
+                                <select multiple name="SelectedTagIds" id="SelectedTagIds" asp-items="@(new SelectList(Model.Tags,"Id","Name",selectedTag))" class="s2tag form-control w-100"></select>
                             </div>
                             <div class="mb-3">
                                 <label asp-for="Post.PostStatus" class="form-label"></label>
@@ -42,9 +42,9 @@
                             <button type="submit" class="btn mt-3 btn-lg btn-primary">Update</button>
 
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-8">  
                             <div class="upload-img p-4">
-                                <img id="editimg"  src="~/uploads/@Model.Post.Picture" />
+                                <img id="editimg" src="~/uploads/@Model.Post.Picture" />
                                 <input id="myimg" type="file" asp-for="Post.Picture" class="custom-in" />
                             </div>
                         </div>
