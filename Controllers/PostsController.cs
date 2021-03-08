@@ -102,11 +102,10 @@ namespace NewsWebApp.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            var viewModel = new PostViewModel
+            var viewModel = new PostCreateViewModel
             {
                 Categories = _context.Categories.ToList(),
                 Tags = _context.Tags.ToList(),
-                Posts = _context.Posts.ToList(),
                 Post = _context.Posts.Find(id)
             };
             ViewData["categories"] = _context.Categories.ToList();
@@ -126,8 +125,6 @@ namespace NewsWebApp.Controllers
                 unique = Guid.NewGuid().ToString() + "_" + newspost.Picture.FileName;
                 string filePath = Path.Combine(uploadsFolder, unique);
                 newspost.Picture.CopyTo(new FileStream(filePath, FileMode.Create));
-
-
             }
 
             var rand = new Random();

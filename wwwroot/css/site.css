@@ -18,6 +18,24 @@ img {
     object-fit: cover;
 }
 
+.accordion .card {
+    background: #04315f;
+}
+
+    .accordion .card .btn-link {
+        font-weight: 400;
+        color: #ffffff;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    .accordion .card .nav-link {
+        color: #fff;
+    }
+.accordion .card-body {
+    background: #44388a
+}
+
 .squareimage img {
     height: 300px;
     object-fit: cover;

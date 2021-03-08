@@ -3,16 +3,11 @@
 
 // Write your JavaScript code.
 
-$(function () {
-    //$("#SelectedTagIds").multiselect({
-    //    includeSelectAllOption: true,
-    //})
-
-    //$("#SelectedCategoryIds").multiselect({
-    //    includeSelectAllOption: true,
-    //});
+$(function() {
 
     $(".s2").select2();
+    $(".s2tag").select2();
+
 
     tinyMCE.init({
         mode: "textareas"

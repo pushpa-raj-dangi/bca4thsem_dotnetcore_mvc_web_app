@@ -11,7 +11,6 @@
 using System;
 using System.Reflection;
 
-[assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap4")]
 [assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("aspnet-NewsWebApp-D3782A5E-F34E-48AF-BACC-CAC0B27F8E27")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("NewsWebApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]

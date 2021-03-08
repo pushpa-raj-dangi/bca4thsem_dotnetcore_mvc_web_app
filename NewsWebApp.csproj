@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>aspnet-NewsWebApp-D3782A5E-F34E-48AF-BACC-CAC0B27F8E27</UserSecretsId>
   </PropertyGroup>
 

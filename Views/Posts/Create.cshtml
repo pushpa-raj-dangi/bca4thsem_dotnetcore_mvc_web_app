@@ -27,11 +27,11 @@
                             <div class="col-md-4">
                                 <div class="mb-3">
                                     <label class="form-label  w-100">Categories</label>
-                                    <select multiple name="SelectedCategoryIds" id="SelectedCategoryIds" asp-items="@(new SelectList(Model.Categories,"Id","Name"))" class="form-control w-100"></select>
+                                    <select multiple name="SelectedCategoryIds" id="SelectedCategoryIds" asp-items="@(new SelectList(Model.Categories,"Id","Name"))" class="s2 form-control w-100"></select>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label w-100">Tags</label>
-                                    <select multiple name="SelectedTagIds" id="SelectedTagIds" asp-items="@(new SelectList(Model.Tags,"Id","Name"))" class="form-control w-100"></select>
+                                    <select multiple name="SelectedTagIds" id="SelectedTagIds" asp-items="@(new SelectList(Model.Tags,"Id","Name"))" class="s2tag form-control w-100"></select>
                                 </div>
                                 <div class="mb-3">
                                     <label asp-for="PostStatus" class="form-label"></label>

@@ -36,13 +36,13 @@ namespace NewsWebApp.Controllers
             {
                 PoliticsNews = GetPostsByCategory(1),
                 EntertainmentNews = GetPostsByCategory(1),
-                FeatureNews= GetPostsByCategory(1),
+                FeatureNews = GetPostsByCategory(1),
                 InternationalNews = GetPostsByCategory(1),
                 BusinessNews = GetPostsByCategory(1),
-                SportsNews= GetPostsByCategory(1),
-                TechnologyNews= GetPostsByCategory(1),
-                LatestUpdate = _context.Posts.Include(p => p.PostCategories).ThenInclude(c => c.Category).Include(tag => tag.PostTags).ThenInclude(pt => pt.Tag).Take(3).OrderByDescending(p=>p.Id),
-
+                SportsNews = GetPostsByCategory(1),
+                TechnologyNews = GetPostsByCategory(1),
+                LatestUpdate = _context.Posts.Include(p => p.PostCategories).ThenInclude(c => c.Category).Include(tag => tag.PostTags).ThenInclude(pt => pt.Tag).Take(3).OrderByDescending(p => p.Id),
+                Categories = _context.Categories.ToList()
         };
 
             if (!User.Identity.IsAuthenticated)
@@ -61,6 +61,7 @@ namespace NewsWebApp.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+       
         public IEnumerable<Post> GetPostsByCategory(int? id)
         {
             return _context.Posts.Where(p => p.PostCategories.Any(pc => pc.CategoryId == id)).ToList().Take(3).Where(p=>p.PostStatus == PostStatus.Publish);
