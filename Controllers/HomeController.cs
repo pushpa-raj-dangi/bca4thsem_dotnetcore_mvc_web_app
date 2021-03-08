@@ -35,10 +35,10 @@ namespace NewsWebApp.Controllers
             var homeViewModel = new HomeViewModel
             {
                 PoliticsNews = GetPostsByCategory(1),
-                EntertainmentNews = GetPostsByCategory(1),
+                EntertainmentNews = GetPostsByCategory(3),
                 FeatureNews = GetPostsByCategory(1),
-                InternationalNews = GetPostsByCategory(1),
-                BusinessNews = GetPostsByCategory(1),
+                InternationalNews = GetPostsByCategory(4),
+                BusinessNews = GetPostsByCategory(2),
                 SportsNews = GetPostsByCategory(1),
                 TechnologyNews = GetPostsByCategory(1),
                 LatestUpdate = _context.Posts.Include(p => p.PostCategories).ThenInclude(c => c.Category).Include(tag => tag.PostTags).ThenInclude(pt => pt.Tag).Take(3).OrderByDescending(p => p.Id),
