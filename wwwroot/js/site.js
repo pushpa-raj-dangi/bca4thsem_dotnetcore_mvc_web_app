@@ -6,7 +6,7 @@
 $(function() {
 
     $(".s2").select2();
-    $(".s2tag").select2();
+    $(".sTag").select2();
 
 
     tinyMCE.init({
@@ -39,7 +39,9 @@ $(function() {
         }
     });
 
-    $('#postTable').DataTable();
+    $('#postTable').DataTable({
+        "order": false,
+    });
     $('#cat').DataTable();
     $('#tag').DataTable();
 

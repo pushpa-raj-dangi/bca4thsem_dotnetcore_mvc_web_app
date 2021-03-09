@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "5zJUkSpRLm1fAZxY85NLufi23vA2EU4xjMfPicof4UQucrMXdC8/Gyy69BwlovryIqLyfOyTDcAgBzg3F9sMKw==",
+  "dgSpecHash": "BvGWhpFzqU6HGqRmNrxHK7H24r4AoYJKNXtuBAutlyq5g2sC27/KOZqWIvg5bGRnUEbVvzNucwUsMPsgg1+rHw==",
   "success": true,
-  "projectFilePath": "D:\\nayasem\\bca4thsem_dotnetcore_mvc_web_app\\NewsWebApp.csproj",
+  "projectFilePath": "D:\\5thstage\\bca4thsem_dotnetcore_mvc_web_app\\NewsWebApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Dell\\.nuget\\packages\\jquery\\1.7.0\\jquery.1.7.0.nupkg.sha512",
     "C:\\Users\\Dell\\.nuget\\packages\\jquery.datatables\\1.10.11\\jquery.datatables.1.10.11.nupkg.sha512",

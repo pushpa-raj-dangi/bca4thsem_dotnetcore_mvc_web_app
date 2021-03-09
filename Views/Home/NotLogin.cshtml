@@ -10,7 +10,7 @@
 
     <div class="row" id="firstrow">
         @{ int i = 0;}
-        @foreach (var news in Model.LatestUpdate)
+        @foreach (var news in Model.FeatureNews)
         {
             i++;
 
@@ -29,11 +29,11 @@
 
                         }
                         <div class="content">
-                            <a class="category" href="/posts/postbycat/@news.PostCategories.FirstOrDefault().Category.Id">
+                            @*<a class="category" href="/posts/postbycat/@news.PostCategories.FirstOrDefault().Category.Id">
                                 <span>
                                     @news.PostCategories.FirstOrDefault().Category.Name
                                 </span>
-                            </a>
+                            </a>*@
 
                             @*@foreach (var item in news.PostCategories)
                                 {
