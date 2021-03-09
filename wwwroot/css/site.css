@@ -67,6 +67,11 @@ a {
 .thulo img {
     width: 100%;
 }
+input#Name {
+    border: none;
+    font-size: 35px;
+    font-weight: 700;
+}
 
 
 .accordion .nav-item {

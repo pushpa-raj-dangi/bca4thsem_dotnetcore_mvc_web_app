@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NewsWebApp.Data;
 using NewsWebApp.Helpers;
+using Microsoft.AspNetCore.Http;
 using NewsWebApp.Models;
 using NewsWebApp.ViewModels;
 
@@ -26,12 +27,12 @@ namespace NewsWebApp.Controllers
         }
         public IActionResult Index()
         {
-            var post = _context.Posts.Include(p => p.PostCategories).ThenInclude(c => c.Category).Include(tag => tag.PostTags).ThenInclude(pt => pt.Tag)
-               .OrderByDescending(p => p.Id);
+            var post = _context.Posts.Include(p => p.PostCategories).ThenInclude(c => c.Category).Include(tag => tag.PostTags).ThenInclude(pt => pt.Tag);
 
             return View(post);
         }
 
+        [HttpGet]
         public IActionResult Create()
         {
             var viewModel = new PostCreateViewModel
@@ -46,17 +47,7 @@ namespace NewsWebApp.Controllers
         [HttpPost]
         public IActionResult Create(PostCreateViewModel newspost, int[] SelectedCategoryIds, int[] SelectedTagIds)
         {
-            string unique = null;
-
-            if (newspost.Picture.FileName != null)
-            {
-                string uploadsFolder = Path.Combine(hostingEnvironment.WebRootPath, "uploads");
-                unique = Guid.NewGuid().ToString() + "_" + newspost.Picture.FileName;
-                string filePath = Path.Combine(uploadsFolder, unique);
-                newspost.Picture.CopyTo(new FileStream(filePath, FileMode.Create));
-
-
-            }
+           
 
             var rand = new Random();
             var slug = SlugHelper.GenerateSlug(newspost.Name);
@@ -75,6 +66,20 @@ namespace NewsWebApp.Controllers
             foreach (var selectedTagId in SelectedTagIds)
             {
                 newspost.PostTags.Add(new PostTag { TagId = selectedTagId });
+            }
+
+
+
+            string unique = null;
+
+            if (newspost.Picture.FileName != null)
+            {
+                string uploadsFolder = Path.Combine(hostingEnvironment.WebRootPath, "uploads");
+                unique = Guid.NewGuid().ToString() + "_" + newspost.Picture.FileName;
+                string filePath = Path.Combine(uploadsFolder, unique);
+                newspost.Picture.CopyTo(new FileStream(filePath, FileMode.Create));
+
+
             }
 
 
@@ -102,14 +107,21 @@ namespace NewsWebApp.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
+            var post = _context.Posts.Find(id);
             var viewModel = new PostCreateViewModel
             {
                 Categories = _context.Categories.ToList(),
                 Tags = _context.Tags.ToList(),
-                Post = _context.Posts.Find(id)
+                Id = post.Id,
+                Name = post.Name,
+                Slug = post.Slug,
+                PostStatus = post.PostStatus
+                
             };
             ViewData["categories"] = _context.Categories.ToList();
-            if (viewModel.Post == null)
+            ViewData["tags"] = _context.Tags.ToList();
+
+            if (viewModel.Name == null)
                 return View("NotFound");
             return View(viewModel);
         }
@@ -172,12 +184,12 @@ namespace NewsWebApp.Controllers
         [HttpGet]
         public IActionResult Details(int id)
         {
-            var post = _context.Posts.Include(p => p.PostCategories).ThenInclude(c => c.Category).Include(tag => tag.PostTags).ThenInclude(pt => pt.Tag).FirstOrDefault(p => p.Id == id);
+            var post = _context.Posts.Include(news => news.PostCategories).ThenInclude(c => c.Category).Include(tag => tag.PostTags).ThenInclude(pt => pt.Tag).FirstOrDefault(pt => pt.Id == id);
             if (post == null)
                 return View("NotFound");
-            var p = post.PostCategories.Select(p => p.CategoryId);
-            ViewData["relatedPost"] = _context.Posts.Where(p => p.PostCategories.Any(pc => pc.CategoryId == p.Id)).ToList();
-            ViewData["latest"] = _context.Posts.Include(p => p.PostCategories).ThenInclude(c => c.Category).Include(tag => tag.PostTags).ThenInclude(pt => pt.Tag).ToList().OrderByDescending(n=>n.CreatedDate);
+            var p = post.PostCategories.Select(pn => pn.CategoryId);
+            ViewData["relatedPost"] = _context.Posts.Where(n => n.PostCategories.Any(pc => pc.CategoryId == n.Id)).ToList();
+            ViewData["latest"] = _context.Posts.Include( l=> l.PostCategories).ThenInclude(c => c.Category).Include(tag => tag.PostTags).ThenInclude(pt => pt.Tag).ToList().OrderByDescending(n=>n.CreatedDate);
             return View(post);
         }
 
@@ -211,11 +223,11 @@ namespace NewsWebApp.Controllers
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            var post = _context.Posts.Include(p => p.PostCategories).ThenInclude(c => c.Category).Include(tag => tag.PostTags).ThenInclude(pt => pt.Tag).FirstOrDefault(p => p.Id == id);
+            var post = _context.Posts.Include(pst => pst.PostCategories).ThenInclude(c => c.Category).Include(tag => tag.PostTags).ThenInclude(pt => pt.Tag).FirstOrDefault(pst => pst.Id == id);
 
             if (post == null)
                 return View("NotFound");
-            var p = post.PostCategories.Select(p => p.CategoryId);
+            var p = post.PostCategories.Select(pcat => pcat.CategoryId);
             return View(post);
         }
 

@@ -18,6 +18,8 @@
     <Compile Remove="Migrations\20210228145424_ApplyAnotation.Designer.cs" />
     <Compile Remove="Migrations\20210305160203_AddedProfileImageInAppUserTable.cs" />
     <Compile Remove="Migrations\20210305160203_AddedProfileImageInAppUserTable.Designer.cs" />
+    <Compile Remove="Migrations\20210308142724_AddedRequiredAttributeInCategoriesAndTags.cs" />
+    <Compile Remove="Migrations\20210308142724_AddedRequiredAttributeInCategoriesAndTags.Designer.cs" />
   </ItemGroup>
 
 

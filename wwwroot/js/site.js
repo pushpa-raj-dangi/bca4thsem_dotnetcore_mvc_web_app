@@ -13,8 +13,6 @@ $(function() {
         mode: "textareas"
     });
 
-    $("#wrap").wrap("<div class='container-fluid'></div>");
-
 
 
 

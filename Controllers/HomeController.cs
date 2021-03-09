@@ -40,8 +40,8 @@ namespace NewsWebApp.Controllers
                 InternationalNews = GetPostsByCategory(4),
                 BusinessNews = GetPostsByCategory(2),
                 SportsNews = GetPostsByCategory(1),
-                TechnologyNews = GetPostsByCategory(1),
-                LatestUpdate = _context.Posts.Include(p => p.PostCategories).ThenInclude(c => c.Category).Include(tag => tag.PostTags).ThenInclude(pt => pt.Tag).Take(3).OrderByDescending(p => p.Id),
+                TechnologyNews = GetPostsByCategory(1,5),
+                LatestUpdate = _context.Posts.Include(p => p.PostCategories).ThenInclude(c => c.Category).Include(tag => tag.PostTags).ThenInclude(pt => pt.Tag).Take(5).OrderByDescending(p => p.Id),
                 Categories = _context.Categories.ToList()
         };
 
@@ -62,9 +62,9 @@ namespace NewsWebApp.Controllers
         }
 
        
-        public IEnumerable<Post> GetPostsByCategory(int? id)
+        public IEnumerable<Post> GetPostsByCategory(int? id, int take=3)
         {
-            return _context.Posts.Where(p => p.PostCategories.Any(pc => pc.CategoryId == id)).ToList().Take(3).Where(p=>p.PostStatus == PostStatus.Publish);
+            return _context.Posts.Where(p => p.PostCategories.Any(pc => pc.CategoryId == id)).ToList().Take(take).Where(p=>p.PostStatus == PostStatus.Publish);
         }
     }
 }

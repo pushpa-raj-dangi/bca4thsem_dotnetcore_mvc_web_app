@@ -21,8 +21,10 @@ namespace NewsWebApp.Models
         public string Content { get; set; }
         public string Picture { get; set; }
         public PostStatus PostStatus { get; set; }
+        [Required]
         public IEnumerable<Category> Categories { get; set; }
 
+        [Required]
         public IEnumerable<Tag> Tags { get; set; }
         public virtual ICollection<PostTag> PostTags { get; set; }
         public virtual ICollection<PostCategory> PostCategories { get; set; }
