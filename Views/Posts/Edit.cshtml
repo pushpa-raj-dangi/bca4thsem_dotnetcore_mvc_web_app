@@ -38,7 +38,7 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label w-100">Tags</label>
-                                <select multiple name="SelectedTagIds" id="SelectedTagIds" asp-items="@(new SelectList(tags,"Id","Name",selectedTag))" class="sTag form-control w-100"></select>
+                                <select multiple name="SelectedTagIds" id="SelectedTagIds" asp-items="@(new MultiSelectList(tags,"Id","Name",selectedTag))" class="sTag form-control w-100"></select>
                             </div>
                             <div class="mb-3">
                                 <label asp-for="PostStatus" class="form-label"></label>
