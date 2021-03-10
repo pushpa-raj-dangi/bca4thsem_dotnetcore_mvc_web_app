@@ -1,18 +1,21 @@
 {
   "format": 1,
   "restore": {
-    "D:\\4thsem\\NewsWebApp\\NewsWebApp.csproj": {}
+    "D:\\5thstage\\bca4thsem_dotnetcore_mvc_web_app\\NewsWebApp.csproj": {}
   },
   "projects": {
-    "D:\\4thsem\\NewsWebApp\\NewsWebApp.csproj": {
+    "D:\\5thstage\\bca4thsem_dotnetcore_mvc_web_app\\NewsWebApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\4thsem\\NewsWebApp\\NewsWebApp.csproj",
+        "projectUniqueName": "D:\\5thstage\\bca4thsem_dotnetcore_mvc_web_app\\NewsWebApp.csproj",
         "projectName": "NewsWebApp",
-        "projectPath": "D:\\4thsem\\NewsWebApp\\NewsWebApp.csproj",
+        "projectPath": "D:\\5thstage\\bca4thsem_dotnetcore_mvc_web_app\\NewsWebApp.csproj",
         "packagesPath": "C:\\Users\\Dell\\.nuget\\packages\\",
-        "outputPath": "D:\\4thsem\\NewsWebApp\\obj\\",
+        "outputPath": "D:\\5thstage\\bca4thsem_dotnetcore_mvc_web_app\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
           "C:\\Users\\Dell\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
@@ -26,6 +29,7 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -37,6 +41,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "Microsoft.AspNet.Mvc": {
               "target": "Package",
@@ -97,7 +102,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.200\\RuntimeIdentifierGraph.json"
         }
       }
     }
