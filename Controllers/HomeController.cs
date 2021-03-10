@@ -35,8 +35,8 @@ namespace NewsWebApp.Controllers
             var homeViewModel = new HomeViewModel
             {
                 PoliticsNews = GetPostsByCategory(1),
-                EntertainmentNews = GetPostsByCategory(3),
-                FeatureNews = GetPostsByCategory(1),
+                EntertainmentNews = GetPostsByCategory(2),
+                FeatureNews = GetPostsByCategory(1,3),
                 InternationalNews = GetPostsByCategory(4),
                 BusinessNews = GetPostsByCategory(2),
                 SportsNews = GetPostsByCategory(1),
@@ -62,9 +62,9 @@ namespace NewsWebApp.Controllers
         }
 
        
-        public IEnumerable<Post> GetPostsByCategory(int? id, int take=3)
+        public IEnumerable<Post> GetPostsByCategory(int? id, int limit=3)
         {
-            return _context.Posts.Where(p => p.PostCategories.Any(pc => pc.CategoryId == id)).ToList().Take(take).Where(p=>p.PostStatus == PostStatus.Publish);
+            return _context.Posts.Where(p => p.PostCategories.Any(pc => pc.CategoryId == id)).ToList().Take(limit).Where(p=>p.PostStatus == PostStatus.Publish);
         }
     }
 }
