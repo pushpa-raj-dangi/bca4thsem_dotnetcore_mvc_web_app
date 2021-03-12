@@ -20,6 +20,8 @@ namespace NewsWebApp.Models
         [DataType(DataType.MultilineText)]
         public string Content { get; set; }
         public string Picture { get; set; }
+        public AppUser AppUser { get; set; }
+
         public PostStatus PostStatus { get; set; }
         [Required]
         public IEnumerable<Category> Categories { get; set; }
@@ -29,7 +31,7 @@ namespace NewsWebApp.Models
         public virtual ICollection<PostTag> PostTags { get; set; }
         public virtual ICollection<PostCategory> PostCategories { get; set; }
 
-        [Display(Name="Create Date")]
+        [Display(Name="Created Date")]
         public DateTime CreatedDate { get; set; }
 
 

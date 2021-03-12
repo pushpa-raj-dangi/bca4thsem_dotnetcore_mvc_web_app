@@ -8,7 +8,8 @@ $(function() {
     $(".s2").select2();
     $(".sTag").select2();
 
-
+    $("#s2createtag").select2();
+    $(".s2cat").select2();
     tinyMCE.init({
         mode: "textareas"
     });

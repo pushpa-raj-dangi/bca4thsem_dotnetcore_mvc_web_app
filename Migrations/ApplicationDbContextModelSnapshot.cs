@@ -252,6 +252,9 @@ namespace NewsWebApp.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
 
@@ -272,6 +275,8 @@ namespace NewsWebApp.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
 
                     b.ToTable("Posts");
                 });
@@ -385,6 +390,13 @@ namespace NewsWebApp.Migrations
                     b.HasOne("NewsWebApp.Models.Post", null)
                         .WithMany("Categories")
                         .HasForeignKey("PostId");
+                });
+
+            modelBuilder.Entity("NewsWebApp.Models.Post", b =>
+                {
+                    b.HasOne("NewsWebApp.Models.AppUser", "AppUser")
+                        .WithMany()
+                        .HasForeignKey("AppUserId");
                 });
 
             modelBuilder.Entity("NewsWebApp.Models.PostCategory", b =>

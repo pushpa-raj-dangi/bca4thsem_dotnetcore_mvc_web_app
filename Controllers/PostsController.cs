@@ -12,6 +12,8 @@ using NewsWebApp.Helpers;
 using Microsoft.AspNetCore.Http;
 using NewsWebApp.Models;
 using NewsWebApp.ViewModels;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace NewsWebApp.Controllers
 {
@@ -20,6 +22,7 @@ namespace NewsWebApp.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment hostingEnvironment;
+
         public PostsController(ApplicationDbContext context, IWebHostEnvironment hostingEnvironment)
         {
             _context = context;
@@ -82,6 +85,7 @@ namespace NewsWebApp.Controllers
             }
 
 
+
             if (!ModelState.IsValid)
                 return View();
 
@@ -95,7 +99,10 @@ namespace NewsWebApp.Controllers
                 PostStatus = newspost.PostStatus,
                 Picture = unique,
                 PostTags = newspost.PostTags,
-                Slug = newspost.Slug
+                Slug = newspost.Slug,
+
+
+
             };
             _context.Add(postModel);
             _context.SaveChanges();
@@ -118,11 +125,17 @@ namespace NewsWebApp.Controllers
                 PostStatus = post.PostStatus,
                 Post = _context.Posts
                 .Include(p => p.PostCategories).Include(pc => pc.PostTags)
-                .FirstOrDefault(p => p.Id == id)
+                .FirstOrDefault(p => p.Id == id),
+                SelectedCategory = post.PostCategories.Select(pc => pc.CategoryId).ToList(),
+                SelectedTag = post.PostTags.Select(pt => pt.TagId).ToList(),
+
 
             };
-            ViewData["categories"] = _context.Categories.ToList();
-            ViewData["tags"] = _context.Tags.ToList();
+
+            ViewBag.Categories = new SelectList(_context.Categories, "Id", "Name");
+            ViewBag.Tags = new SelectList(_context.Tags, "Id", "Name");
+
+
 
             if (viewModel.Post == null)
                 return View("NotFound");
@@ -130,21 +143,18 @@ namespace NewsWebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(PostCreateViewModel newspost, int[] SelectedCategoryIds, int[] SelectedTagIds)
+        public IActionResult Edit(PostCreateViewModel newspost)
         {
             string unique = null;
 
-            if (newspost.Picture.FileName != null && newspost.Picture.Length> 0)
+            if (newspost.Picture.FileName != null && newspost.Picture.Length > 0)
             {
                 string uploadsFolder = Path.Combine(hostingEnvironment.WebRootPath, "uploads");
                 unique = Guid.NewGuid().ToString() + "_" + newspost.Picture.FileName;
                 string filePath = Path.Combine(uploadsFolder, unique);
                 newspost.Picture.CopyTo(new FileStream(filePath, FileMode.Create));
             }
-            else
-            {
-                unique = "default.jpg";
-            }
+
 
             var rand = new Random();
             var slug = SlugHelper.GenerateSlug(newspost.Name);
@@ -154,72 +164,30 @@ namespace NewsWebApp.Controllers
             }
             newspost.Slug = slug;
 
-            var removedCategories = new List<PostCategory>();
-            foreach (var postCategory in _context.PostCategories)
-            {
-                if (!SelectedCategoryIds.Contains(postCategory.CategoryId))
-                    removedCategories.Add(postCategory);
-            }
-
-            foreach (var postCategory in removedCategories)
-            {
-                _context.PostCategories.Remove(postCategory);
-            }
-
-            foreach (var selectedCatId in SelectedCategoryIds.Where(selectedCatId => !_context.PostCategories.Any(pc => pc.CategoryId == selectedCatId))
-            //add newly selected
-            )
-            {
-                _context.PostCategories.Add(new PostCategory { CategoryId = selectedCatId, PostId = newspost.Id });
-            }
-
-            var removedTags = new List<PostTag>();
-            foreach (var postTag in _context.PostTags)
-            {
-                if (!SelectedTagIds.Contains(postTag.TagId))
-                    removedTags.Add(postTag);
-            }
-
-            foreach (var postTag in removedTags)
-            {
-                _context.PostTags.Remove(postTag);
-            }
-
-            foreach (var selectedTagId in SelectedTagIds.Where(selectedTagId => !_context.PostTags.Any(pc => pc.TagId == selectedTagId))
-            //add newly selected
-            )
-            {
-                _context.PostTags.Add(new PostTag { TagId = selectedTagId, PostId = newspost.Id });
-            }
 
             if (!ModelState.IsValid)
                 return View();
 
-            //var postModel = new Post
-            //{
-            //    Content = newspost.Content,
-            //    Name = newspost.Name,
-            //    Categories = newspost.Categories,
-            //    Tags = newspost.Tags,
-            //    PostCategories = newspost.PostCategories,
-            //    PostStatus = newspost.PostStatus,
-            //    Picture = unique,
-            //    PostTags = newspost.PostTags,
-            //    Slug = newspost.Slug
-            //};
+            var postInDb = _context.Posts.Include(p => p.PostCategories).Include(p => p.PostTags)
+                    .Where(p => p.Id == newspost.Id).FirstOrDefault();
 
-            var postInDb = _context.Posts.Find(newspost.Id);
 
             postInDb.Content = newspost.Content;
             postInDb.Name = newspost.Name;
-            postInDb.Categories = newspost.Categories;
-            //postInDb.Tags = newspost.Tags;
-            //postInDb.PostCategories = newspost.PostCategories;
+            postInDb.PostCategories = new List<PostCategory>();
+            foreach (var CategoryId in newspost.SelectedCategory)
+            {
+                postInDb.PostCategories.Add(new PostCategory { CategoryId = CategoryId });
+            }
+            postInDb.PostTags = new List<PostTag>();
+            foreach (var TagId in newspost.SelectedTag)
+            {
+                postInDb.PostTags.Add(new PostTag { TagId = TagId });
+            }
+
             postInDb.PostStatus = newspost.PostStatus;
             postInDb.Picture = unique;
-            postInDb.PostTags = newspost.PostTags;
             postInDb.Slug = newspost.Slug;
-            _context.Update(postInDb);
             _context.SaveChanges();
 
             return RedirectToAction(nameof(Index));

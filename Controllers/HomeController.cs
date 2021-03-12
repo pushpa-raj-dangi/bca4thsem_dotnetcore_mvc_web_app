@@ -34,9 +34,9 @@ namespace NewsWebApp.Controllers
 
             var homeViewModel = new HomeViewModel
             {
-                PoliticsNews = GetPostsByCategory(1),
+                PoliticsNews = GetPostsByCategory(7),
                 EntertainmentNews = GetPostsByCategory(2),
-                FeatureNews = GetPostsByCategory(1,3),
+                FeatureNews = GetPostsByCategory(14,3),
                 InternationalNews = GetPostsByCategory(4),
                 BusinessNews = GetPostsByCategory(2),
                 SportsNews = GetPostsByCategory(1),

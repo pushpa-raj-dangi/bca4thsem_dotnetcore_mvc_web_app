@@ -23,12 +23,15 @@ namespace NewsWebApp.ViewModels
         public IFormFile Picture { get; set; }
         public PostStatus PostStatus { get; set; }
         public IEnumerable<Category> Categories { get; set; }
-
+        public List<int> SelectedCategory { get; set; }
+        public List<int> SelectedTag { get; set; }
+        public AppUser AppUser { get; set; }
         public IEnumerable<Tag> Tags { get; set; }
         public virtual ICollection<PostTag> PostTags { get; set; }
         public virtual ICollection<PostCategory> PostCategories { get; set; }
         public ICollection<Post> Posts { get; set; }
         public Post Post { get; set; }
+        public string UserId { get; set; }
 
         public PostCreateViewModel()
         {
