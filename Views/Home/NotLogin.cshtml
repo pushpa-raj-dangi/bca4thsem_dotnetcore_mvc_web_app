@@ -6,6 +6,21 @@
 }
 
 
+    @*<div class="row">
+        <div class="col-md-4">
+            <ul class="list-group">
+
+            @foreach (var news in Model.PostsByAuthor)
+            {
+                <li class="list-group-item">
+                    @news.Name
+                    <img src="~/uploads/@news.AppUser.ProfileImg" alt="Alternate Text" />
+                </li>
+            }
+            </ul>
+            </div>
+    </div>*@
+
 <div class="container">
 
     <div class="row" id="firstrow">

@@ -14,9 +14,17 @@
             <div class="shadow-sm p-3">
                 <h3 class="my-5">@Model.Name</h3>
                 <hr />
-                <div class="time text-dark">
-                    Published On
-                    <i class="fas fa-clock"></i> @Model.CreatedDate.ToString("dddd, dd MMMM yyyy")
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="~/uploads/@Model.AppUser.ProfileImg" class="rounded-circle" style="width:40px;object-fit:cover;height:40px">
+                        @Model.AppUser.UserName
+                    </div>
+                    <div class="col-md-6">
+                        <div class="time text-dark">
+                            Published On
+                            <i class="fas fa-clock"></i> @Model.CreatedDate.ToString("dddd, dd MMMM yyyy")
+                        </div>
+                    </div>
                 </div>
                 <hr />
                 @if (Model.Picture != null)

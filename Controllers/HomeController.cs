@@ -10,7 +10,6 @@ using Microsoft.Extensions.Logging;
 using NewsWebApp.Data;
 using NewsWebApp.Models;
 using NewsWebApp.ViewModels;
-
 namespace NewsWebApp.Controllers
 {
     [Authorize]
@@ -31,19 +30,20 @@ namespace NewsWebApp.Controllers
             {
                 Posts = _context.Posts.Include(p => p.Categories).Include(c => c.Tags).ToList()
             };
-            
+
 
             var homeViewModel = new HomeViewModel
             {
                 PoliticsNews = GetPostsByCategory(7),
                 EntertainmentNews = GetPostsByCategory(2),
-                FeatureNews = GetPostsByCategory(14,3),
+                FeatureNews = GetPostsByCategory(14, 3),
                 InternationalNews = GetPostsByCategory(4),
-                BusinessNews = GetPostsByCategory(8,4),
+                BusinessNews = GetPostsByCategory(8, 4),
                 SportsNews = GetPostsByCategory(1),
-                TechnologyNews = GetPostsByCategory(1,5),
-                LatestUpdate = _context.Posts.Include(p => p.PostCategories).ThenInclude(c => c.Category).Include(tag => tag.PostTags).ThenInclude(pt => pt.Tag).Include(u=>u.AppUser).Take(5).OrderByDescending(p => p.Id),
-                Categories = _context.Categories.ToList()
+                TechnologyNews = GetPostsByCategory(1, 5),
+                LatestUpdate = _context.Posts.Include(u => u.AppUser).Include(p => p.PostCategories).ThenInclude(c => c.Category).Include(tag => tag.PostTags).ThenInclude(pt => pt.Tag).Take(5).OrderByDescending(p => p.Id),
+                Categories = _context.Categories.ToList(),
+                //PostsByAuthor = _context.Posts.Include(post => post.AppUser).ToList()
         };
 
             if (!User.Identity.IsAuthenticated)

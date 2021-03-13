@@ -186,12 +186,12 @@ namespace NewsWebApp.Controllers
         [HttpGet]
         public IActionResult Details(int id)
         {
-            var post = _context.Posts.Include(news => news.PostCategories).ThenInclude(c => c.Category).Include(tag => tag.PostTags).ThenInclude(pt => pt.Tag).FirstOrDefault(pt => pt.Id == id);
+            var post = _context.Posts.Include(news => news.PostCategories).ThenInclude(c => c.Category).Include(tag => tag.PostTags).ThenInclude(pt => pt.Tag).Include(u=>u.AppUser).FirstOrDefault(pt => pt.Id == id);
             if (post == null)
                 return View("NotFound");
             var p = post.PostCategories.Select(pn => pn.CategoryId);
             ViewData["relatedPost"] = _context.Posts.Where(n => n.PostCategories.Any(pc => pc.CategoryId == n.Id)).ToList();
-            ViewData["latest"] = _context.Posts.Include(l => l.PostCategories).ThenInclude(c => c.Category).Include(tag => tag.PostTags).ThenInclude(pt => pt.Tag).ToList().OrderByDescending(n => n.CreatedDate);
+            ViewData["latest"] = _context.Posts.Include(l => l.PostCategories).ThenInclude(c => c.Category).Include(tag => tag.PostTags).ThenInclude(pt => pt.Tag).Include(u=>u.AppUser).ToList().OrderByDescending(n => n.CreatedDate);
             return View(post);
         }
 
