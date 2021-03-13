@@ -8801,11 +8801,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\4thsem\\NewsWebApp\\NewsWebApp.csproj",
+      "projectUniqueName": "C:\\Users\\Dell\\Desktop\\bca4thsem_dotnetcore_mvc_web_app\\NewsWebApp.csproj",
       "projectName": "NewsWebApp",
-      "projectPath": "D:\\4thsem\\NewsWebApp\\NewsWebApp.csproj",
+      "projectPath": "C:\\Users\\Dell\\Desktop\\bca4thsem_dotnetcore_mvc_web_app\\NewsWebApp.csproj",
       "packagesPath": "C:\\Users\\Dell\\.nuget\\packages\\",
-      "outputPath": "D:\\4thsem\\NewsWebApp\\obj\\",
+      "outputPath": "C:\\Users\\Dell\\Desktop\\bca4thsem_dotnetcore_mvc_web_app\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Dell\\AppData\\Roaming\\NuGet\\NuGet.Config",

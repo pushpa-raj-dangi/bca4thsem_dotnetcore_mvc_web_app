@@ -31,6 +31,7 @@ namespace NewsWebApp.Controllers
             {
                 Posts = _context.Posts.Include(p => p.Categories).Include(c => c.Tags).ToList()
             };
+            
 
             var homeViewModel = new HomeViewModel
             {
@@ -38,10 +39,10 @@ namespace NewsWebApp.Controllers
                 EntertainmentNews = GetPostsByCategory(2),
                 FeatureNews = GetPostsByCategory(14,3),
                 InternationalNews = GetPostsByCategory(4),
-                BusinessNews = GetPostsByCategory(2),
+                BusinessNews = GetPostsByCategory(8,4),
                 SportsNews = GetPostsByCategory(1),
                 TechnologyNews = GetPostsByCategory(1,5),
-                LatestUpdate = _context.Posts.Include(p => p.PostCategories).ThenInclude(c => c.Category).Include(tag => tag.PostTags).ThenInclude(pt => pt.Tag).Take(5).OrderByDescending(p => p.Id),
+                LatestUpdate = _context.Posts.Include(p => p.PostCategories).ThenInclude(c => c.Category).Include(tag => tag.PostTags).ThenInclude(pt => pt.Tag).Include(u=>u.AppUser).Take(5).OrderByDescending(p => p.Id),
                 Categories = _context.Categories.ToList()
         };
 

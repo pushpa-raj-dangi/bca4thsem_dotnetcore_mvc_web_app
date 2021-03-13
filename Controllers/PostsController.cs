@@ -72,19 +72,13 @@ namespace NewsWebApp.Controllers
 
 
 
-            string unique = null;
-
-            if (newspost.Picture.FileName != null)
-            {
-                string uploadsFolder = Path.Combine(hostingEnvironment.WebRootPath, "uploads");
-                unique = Guid.NewGuid().ToString() + "_" + newspost.Picture.FileName;
-                string filePath = Path.Combine(uploadsFolder, unique);
-                newspost.Picture.CopyTo(new FileStream(filePath, FileMode.Create));
+            string unique = fileUpload(newspost.Picture);
 
 
-            }
 
-
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userName = User.FindFirstValue(ClaimTypes.Name);
+            var user = _context.Users.Single(u => u.Id == userId);
 
             if (!ModelState.IsValid)
                 return View();
@@ -100,6 +94,8 @@ namespace NewsWebApp.Controllers
                 Picture = unique,
                 PostTags = newspost.PostTags,
                 Slug = newspost.Slug,
+                AppUser = user
+
 
 
 
@@ -145,15 +141,7 @@ namespace NewsWebApp.Controllers
         [HttpPost]
         public IActionResult Edit(PostCreateViewModel newspost)
         {
-            string unique = null;
-
-            if (newspost.Picture.FileName != null && newspost.Picture.Length > 0)
-            {
-                string uploadsFolder = Path.Combine(hostingEnvironment.WebRootPath, "uploads");
-                unique = Guid.NewGuid().ToString() + "_" + newspost.Picture.FileName;
-                string filePath = Path.Combine(uploadsFolder, unique);
-                newspost.Picture.CopyTo(new FileStream(filePath, FileMode.Create));
-            }
+            string filename = fileUpload(newspost.Picture);
 
 
             var rand = new Random();
@@ -186,7 +174,8 @@ namespace NewsWebApp.Controllers
             }
 
             postInDb.PostStatus = newspost.PostStatus;
-            postInDb.Picture = unique;
+            if (filename != null)
+                postInDb.Picture = filename;
             postInDb.Slug = newspost.Slug;
             _context.SaveChanges();
 
@@ -254,6 +243,28 @@ namespace NewsWebApp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        string fileUpload(IFormFile file)
+        {
+            string unique = null;
+            try
+            {
+                if (file.FileName != null)
+
+                {
+                    string uploadsFolder = Path.Combine(hostingEnvironment.WebRootPath, "uploads");
+                    unique = Guid.NewGuid().ToString() + "_" + file.FileName;
+                    string filePath = Path.Combine(uploadsFolder, unique);
+                    file.CopyTo(new FileStream(filePath, FileMode.Create));
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+            return unique;
+        }
 
     }
 }

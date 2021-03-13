@@ -1,19 +1,28 @@
 ﻿
+using NewsWebApp.Data;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using System.Web.Mvc;
 
 namespace NewsWebApp.Models
 {
     public class Post
     {
+        private readonly ApplicationDbContext _context;
+
+        public Post(ApplicationDbContext context)
+        {
+            _context = context;
+        }
         public int Id { get; set; }
         [Required]
-        [Display(Name="Post Title")]
+        [Display(Name = "Post Title")]
         public string Name { get; set; }
         public string Slug { get; set; }
         [AllowHtml]
@@ -21,6 +30,9 @@ namespace NewsWebApp.Models
         public string Content { get; set; }
         public string Picture { get; set; }
         public AppUser AppUser { get; set; }
+
+        [Required]
+        public string AppUserId { get; set; }
 
         public PostStatus PostStatus { get; set; }
         [Required]
@@ -31,7 +43,7 @@ namespace NewsWebApp.Models
         public virtual ICollection<PostTag> PostTags { get; set; }
         public virtual ICollection<PostCategory> PostCategories { get; set; }
 
-        [Display(Name="Created Date")]
+        [Display(Name = "Created Date")]
         public DateTime CreatedDate { get; set; }
 
 
@@ -40,8 +52,11 @@ namespace NewsWebApp.Models
             PostTags = new Collection<PostTag>();
             PostCategories = new Collection<PostCategory>();
             CreatedDate = DateTime.UtcNow;
-
         }
+
+
+
+
 
     }
 }

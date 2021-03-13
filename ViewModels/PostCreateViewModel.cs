@@ -13,8 +13,8 @@ namespace NewsWebApp.ViewModels
     public class PostCreateViewModel
     {
         public int Id { get; set; }
-        [Required]
         [Display(Name = "Post Title")]
+        [Required]
         public string Name { get; set; }
         public string Slug { get; set; }
         [AllowHtml]
