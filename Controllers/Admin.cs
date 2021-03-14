@@ -12,10 +12,12 @@ namespace NewsWebApp.Controllers
     public class Admin : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;
+        private readonly UserManager<AppUser> userManager;
 
-        public Admin(RoleManager<IdentityRole> roleManager)
+        public Admin(RoleManager<IdentityRole> roleManager, UserManager<AppUser> userManager)
         {
             this.roleManager = roleManager;
+            this.userManager = userManager;
         }
         [HttpGet]   
         public IActionResult CreateRole()
@@ -51,6 +53,29 @@ namespace NewsWebApp.Controllers
         {
             var roles = roleManager.Roles;
             return View(roles);
+        }
+
+        public async Task<IActionResult> Editrole(string id)
+        {
+            var role = await roleManager.FindByIdAsync(id);
+            if (role == null)
+            {
+                return Redirect("Notfound");
+            }
+            var model = new EditRoleViewModel
+            {
+                Id = role.Id,
+                RoleName = role.Name,
+
+
+            };
+            foreach (var user in userManager.Users)
+            {
+                if (await userManager.IsInRoleAsync(user, role.Name)) {
+                    model.Users.Add(user.UserName);
+                };
+            }
+            return View(model);
         }
     }
 }

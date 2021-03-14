@@ -8,7 +8,7 @@ namespace NewsWebApp.ViewModels
 {
     public class EditRoleViewModel
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string RoleName { get; set; }
         [Required(ErrorMessage = "Role Name is required")]
         public string MyProperty { get; set; }
