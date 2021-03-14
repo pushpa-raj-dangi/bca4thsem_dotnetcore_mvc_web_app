@@ -26,6 +26,9 @@
                             <th>
                                 Tags
                             </th>
+                            <th>
+                                Author
+                            </th>
                         </tr>
                     </thead>
 
@@ -48,6 +51,9 @@
 
                                 <td>
                                     @string.Join(", ", post.PostTags.Select(p => p.Tag.Name))
+                                </td>
+                                <td>
+                                    @post.AppUser.UserName
                                 </td>
 
                             </tr>

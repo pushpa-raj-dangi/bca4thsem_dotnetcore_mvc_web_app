@@ -16,8 +16,13 @@
                 <hr />
                 <div class="row">
                     <div class="col-md-6">
-                        <img src="~/uploads/@Model.AppUser.ProfileImg" class="rounded-circle" style="width:40px;object-fit:cover;height:40px">
-                        @Model.AppUser.UserName
+                        <a href="/posts/postbyauthor/@Model.AppUserId">
+                            <img src="~/uploads/@Model.AppUser.ProfileImg" class="rounded-circle" style="width:40px;object-fit:cover;height:40px">
+                           @{
+                               var index = Model.AppUser.UserName.IndexOf('@');
+                           }
+                            @Model.AppUser.UserName.Substring(0,index)
+                        </a>
                     </div>
                     <div class="col-md-6">
                         <div class="time text-dark">
@@ -79,13 +84,13 @@
                             <img src="~/uploads/default.jpg" />
 
                         }
-                    <div class="card-body">
-                        @post.Name
-                        <div class="time text-dark">
-                           
-                            <i class="fas fa-clock"></i> @Model.CreatedDate.ToString("dddd, dd MMMM yyyy")
+                        <div class="card-body">
+                            @post.Name
+                            <div class="time text-dark">
+
+                                <i class="fas fa-clock"></i> @Model.CreatedDate.ToString("dddd, dd MMMM yyyy")
+                            </div>
                         </div>
-                    </div>
                     </div>
                 </a>
             </div>

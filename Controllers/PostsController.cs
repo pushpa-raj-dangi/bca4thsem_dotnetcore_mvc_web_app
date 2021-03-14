@@ -30,7 +30,7 @@ namespace NewsWebApp.Controllers
         }
         public IActionResult Index()
         {
-            var post = _context.Posts.Include(p => p.PostCategories).ThenInclude(c => c.Category).Include(tag => tag.PostTags).ThenInclude(pt => pt.Tag).OrderByDescending(pid => pid.CreatedDate);
+            var post = _context.Posts.Include(p => p.PostCategories).ThenInclude(c => c.Category).Include(tag => tag.PostTags).ThenInclude(pt => pt.Tag).Include(u=>u.AppUser).OrderByDescending(pid => pid.CreatedDate);
 
             return View(post);
         }
@@ -186,12 +186,12 @@ namespace NewsWebApp.Controllers
         [HttpGet]
         public IActionResult Details(int id)
         {
-            var post = _context.Posts.Include(news => news.PostCategories).ThenInclude(c => c.Category).Include(tag => tag.PostTags).ThenInclude(pt => pt.Tag).Include(u=>u.AppUser).FirstOrDefault(pt => pt.Id == id);
+            var post = _context.Posts.Include(news => news.PostCategories).ThenInclude(c => c.Category).Include(tag => tag.PostTags).ThenInclude(pt => pt.Tag).Include(u => u.AppUser).FirstOrDefault(pt => pt.Id == id);
             if (post == null)
                 return View("NotFound");
-            var p = post.PostCategories.Select(pn => pn.CategoryId);
-            ViewData["relatedPost"] = _context.Posts.Where(n => n.PostCategories.Any(pc => pc.CategoryId == n.Id)).ToList();
-            ViewData["latest"] = _context.Posts.Include(l => l.PostCategories).ThenInclude(c => c.Category).Include(tag => tag.PostTags).ThenInclude(pt => pt.Tag).Include(u=>u.AppUser).ToList().OrderByDescending(n => n.CreatedDate);
+            var pId = post.PostCategories.Select(pn => pn.CategoryId).FirstOrDefault();
+            ViewData["relatedPost"] = _context.Posts.Where(n => n.PostCategories.Any(pc => pc.CategoryId == pId)).ToList();
+            ViewData["latest"] = _context.Posts.Include(l => l.PostCategories).ThenInclude(c => c.Category).Include(tag => tag.PostTags).ThenInclude(pt => pt.Tag).Include(u => u.AppUser).ToList().OrderByDescending(n => n.CreatedDate).Take(5);
             return View(post);
         }
 
@@ -207,6 +207,20 @@ namespace NewsWebApp.Controllers
                 return View("NotFound", id);
             }
             ViewData["category"] = _context.Categories.SingleOrDefault(p => p.Id == id).Name;
+            return View(post);
+        }
+
+        public IActionResult PostByAuthor(string id)
+        {
+            var post = _context.Posts.Where(p => p.AppUser.Id==id).ToList();
+
+            if (post.Count == 0)
+            {
+                Response.StatusCode = 404;
+                return View("NotFound", id);
+            }
+            var user = _context.Users.SingleOrDefault(p => p.Id == id).UserName;
+            ViewData["author"] = GenerateUserName.RenderUserName(user);
             return View(post);
         }
 

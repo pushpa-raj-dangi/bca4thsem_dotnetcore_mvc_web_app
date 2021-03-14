@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<Post>
 @{
-    ViewData["Title"] = ViewData["category"] ==null ? ViewData["category"] : "Not Found" + "Category";
+    ViewData["Title"] = ViewData["category"];
     Layout = "~/Views/Shared/_Layout.cshtml";
     var category = ViewData["category"];    
 }

@@ -34,14 +34,14 @@ namespace NewsWebApp.Controllers
 
             var homeViewModel = new HomeViewModel
             {
-                PoliticsNews = GetPostsByCategory(7),
+                PoliticsNews = GetPostsByCategory(7,4),
                 EntertainmentNews = GetPostsByCategory(2),
                 FeatureNews = GetPostsByCategory(14, 3),
                 InternationalNews = GetPostsByCategory(4),
                 BusinessNews = GetPostsByCategory(8, 4),
                 SportsNews = GetPostsByCategory(1),
                 TechnologyNews = GetPostsByCategory(1, 5),
-                LatestUpdate = _context.Posts.Include(u => u.AppUser).Include(p => p.PostCategories).ThenInclude(c => c.Category).Include(tag => tag.PostTags).ThenInclude(pt => pt.Tag).Take(5).OrderByDescending(p => p.Id),
+                LatestUpdate = _context.Posts.Include(u => u.AppUser).Include(p => p.PostCategories).ThenInclude(c => c.Category).Include(tag => tag.PostTags).ThenInclude(pt => pt.Tag).Take(5).OrderByDescending(p => p.Id).Where(p=>p.PostStatus ==PostStatus.Publish),
                 Categories = _context.Categories.ToList(),
                 //PostsByAuthor = _context.Posts.Include(post => post.AppUser).ToList()
         };
@@ -65,7 +65,7 @@ namespace NewsWebApp.Controllers
        
         public IEnumerable<Post> GetPostsByCategory(int? id, int limit=3)
         {
-            return _context.Posts.Where(p => p.PostCategories.Any(pc => pc.CategoryId == id)).ToList().Take(limit).Where(p=>p.PostStatus == PostStatus.Publish);
+            return _context.Posts.Where(p => p.PostCategories.Any(pc => pc.CategoryId == id)).Take(limit).Where(p=>p.PostStatus == PostStatus.Publish).ToList();
         }
     }
 }

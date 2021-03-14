@@ -84,17 +84,8 @@ namespace NewsWebApp.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                string unique = null;
-
-                if (Input.ProfileImg.FileName != null)
-                {
-                    string uploadsFolder = Path.Combine(hostingEnvironment.WebRootPath, "uploads");
-                    unique = Guid.NewGuid().ToString() + "_" + Input.ProfileImg.FileName;
-                    string filePath = Path.Combine(uploadsFolder, unique);
-                    Input.ProfileImg.CopyTo(new FileStream(filePath, FileMode.Create));
-
-
-                }
+                var unique = fileUpload(Input.ProfileImg);
+            
 
                 var user = new AppUser { UserName = Input.Email, Email = Input.Email, ProfileImg = unique };
                 var result = await _userManager.CreateAsync(user, Input.Password);
@@ -131,6 +122,29 @@ namespace NewsWebApp.Areas.Identity.Pages.Account
 
             // If we got this far, something failed, redisplay form
             return Page();
+        }
+
+        string fileUpload(IFormFile file)
+        {
+            string unique = null;
+            try
+            {
+                if (file.FileName != null)
+
+                {
+                    string uploadsFolder = Path.Combine(hostingEnvironment.WebRootPath, "uploads");
+                    unique = Guid.NewGuid().ToString() + "_" + file.FileName;
+                    string filePath = Path.Combine(uploadsFolder, unique);
+                    file.CopyTo(new FileStream(filePath, FileMode.Create));
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+            return unique;
         }
     }
 }

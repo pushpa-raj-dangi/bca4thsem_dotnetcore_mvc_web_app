@@ -18,8 +18,10 @@
                 {
 
                     <img class="avatar" src="~/uploads/user.png" alt="Alternate Text" />
+
                 }
-                @User.Identity.Name.Substring(0, 11)
+                @{var index = User.Identity.Name.IndexOf('@');  }
+                @User.Identity.Name.Substring(0, index)
             </a>
             <div class="dropdown-menu custom-drop">
                 <a class="nav-link" asp-controller="Posts" asp-action="Index" title="Manage">
