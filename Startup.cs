@@ -33,7 +33,7 @@ namespace NewsWebApp
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
             
-            services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = false)
+            services.AddIdentity<AppUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false).AddDefaultUI()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews()
     .AddNewtonsoftJson(options =>
@@ -64,6 +64,7 @@ namespace NewsWebApp
 
             app.UseAuthentication();
             app.UseAuthorization();
+            
 
             app.UseEndpoints(endpoints =>
             {
@@ -72,6 +73,8 @@ namespace NewsWebApp
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+
+            
         }
     }
 }

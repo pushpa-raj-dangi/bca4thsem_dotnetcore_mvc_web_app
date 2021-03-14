@@ -1,18 +1,21 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Dell\\Desktop\\bca4thsem_dotnetcore_mvc_web_app\\NewsWebApp.csproj": {}
+    "D:\\4thsemproject\\bca4thsem_dotnetcore_mvc_web_app\\NewsWebApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Dell\\Desktop\\bca4thsem_dotnetcore_mvc_web_app\\NewsWebApp.csproj": {
+    "D:\\4thsemproject\\bca4thsem_dotnetcore_mvc_web_app\\NewsWebApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Dell\\Desktop\\bca4thsem_dotnetcore_mvc_web_app\\NewsWebApp.csproj",
+        "projectUniqueName": "D:\\4thsemproject\\bca4thsem_dotnetcore_mvc_web_app\\NewsWebApp.csproj",
         "projectName": "NewsWebApp",
-        "projectPath": "C:\\Users\\Dell\\Desktop\\bca4thsem_dotnetcore_mvc_web_app\\NewsWebApp.csproj",
+        "projectPath": "D:\\4thsemproject\\bca4thsem_dotnetcore_mvc_web_app\\NewsWebApp.csproj",
         "packagesPath": "C:\\Users\\Dell\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Dell\\Desktop\\bca4thsem_dotnetcore_mvc_web_app\\obj\\",
+        "outputPath": "D:\\4thsemproject\\bca4thsem_dotnetcore_mvc_web_app\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
           "C:\\Users\\Dell\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
@@ -26,6 +29,7 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -37,6 +41,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "Microsoft.AspNet.Mvc": {
               "target": "Package",
@@ -72,7 +77,7 @@
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
-              "version": "[3.1.0-preview1-19509-03, )"
+              "version": "[3.1.5, )"
             },
             "jquery.datatables": {
               "target": "Package",
@@ -97,7 +102,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.200\\RuntimeIdentifierGraph.json"
         }
       }
     }
