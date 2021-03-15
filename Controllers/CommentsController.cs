@@ -84,8 +84,17 @@ namespace NewsWebApp.Controllers
                  _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
-           
-            return View(comment);
+            var newcomment = new Comment
+            {
+                PostId = id,
+                CContent = vm.Comment,
+                DateComment = DateTime.Now
+
+            };
+            _context.Comments.Add(newcomment);
+            _context.SaveChanges();
+
+            return RedirectToAction("Details","Posts",new { id = id});
 
         }
 
