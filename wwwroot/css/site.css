@@ -19,7 +19,7 @@ img {
 }
 
 .accordion .card {
-    background: #04315f;
+    background: #333;
 }
 
     .accordion .card .btn-link {
@@ -30,10 +30,10 @@ img {
     }
 
     .accordion .card .nav-link {
-        color: #fff;
+        color: #ddd;
     }
 .accordion .card-body {
-    background: #44388a
+    background: #262432;
 }
 
 .squareimage img {
@@ -73,6 +73,11 @@ input#Name {
     font-weight: 700;
 }
 
+.validation-summary-errors ul {
+    list-style: none;
+    margin: 15px -5px;
+    padding: 0px;
+}
 
 .accordion .nav-item {
     margin-left: 30px;

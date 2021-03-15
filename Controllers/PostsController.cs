@@ -17,7 +17,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace NewsWebApp.Controllers
 {
-    [Authorize]
+    [Authorize(Roles ="Admin")]
     public class PostsController : Controller
     {
         private readonly ApplicationDbContext _context;

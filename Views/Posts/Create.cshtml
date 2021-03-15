@@ -15,6 +15,7 @@
 
             <div class="container my-5">
                 <form class="h-100" asp-controller="Posts" enctype="multipart/form-data" asp-action="Create" method="post">
+                    <div asp-validation-summary="All" class="text-danger"></div>
                     <div class="mb-5">
                         <input class="form-control" placeholder="Add title" asp-for="Name">
                     </div>

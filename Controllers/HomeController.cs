@@ -23,7 +23,7 @@ namespace NewsWebApp.Controllers
             _logger = logger;
             _context = context;
         }
-
+        [ResponseCache(Duration = 5, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Index()
         {
             var viewModel = new PostViewModel
