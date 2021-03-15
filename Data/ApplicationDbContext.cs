@@ -19,6 +19,8 @@ namespace NewsWebApp.Data
         public DbSet<Tag> Tags { get; set; }
         public DbSet<PostCategory> PostCategories { get; set; }
         public DbSet<PostTag> PostTags { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+
 
 
         protected override void OnModelCreating(ModelBuilder builder)

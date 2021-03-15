@@ -3,7 +3,7 @@
 
 // Write your JavaScript code.
 
-$(function() {
+$(function () {
 
     $(".s2").select2();
     $(".sTag").select2();
@@ -11,8 +11,8 @@ $(function() {
     $("#s2createtag").select2();
     $(".s2cat").select2();
     tinyMCE.init({
-        mode: "textareas"
-    });
+        selector: ".create-post ",
+    })
 
 
 

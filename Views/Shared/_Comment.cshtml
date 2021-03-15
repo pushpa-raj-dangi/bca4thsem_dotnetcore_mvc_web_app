@@ -1,0 +1,17 @@
+﻿@model PostDetailViewModel
+
+@using (Html.BeginForm("Add", "Comments", FormMethod.Post, new { onsubmit = "return Submit()" }))
+{
+    <div class="cat-title"> Comment Your View</div>
+    @Html.AntiForgeryToken()
+    <div class="form-group row align-items-baseline no-gutters">
+        <label for="inputPassword" class="col-md-1 col-form-label">
+            <img class="comment-img" src="/uploads/user.png" alt="Alternate Text" />
+        </label>
+        <div class="col-md-10">
+            <input type="hidden" asp-for="Id" />
+            <textarea asp-for="Comment" class="form-control" rows="3"></textarea>
+            <button type="submit" class="btn btn-primary mt-3">Add Comment</button>
+        </div>
+    </div>
+}

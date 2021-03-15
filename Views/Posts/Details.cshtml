@@ -1,10 +1,9 @@
-﻿@model Post
+﻿@model PostDetailViewModel
 @{
-    ViewData["Title"] = Model.Name;
+    ViewData["Title"] = Model.Post.Name;
     Layout = "~/Views/Shared/_Layout.cshtml";
     var posts = ViewData["relatedPost"] as IEnumerable<Post>;
     var latest = ViewData["latest"] as IEnumerable<Post>;
-
 
 }
 
@@ -16,25 +15,25 @@
                 <hr />
                 <div class="row">
                     <div class="col-md-6">
-                        <a href="/posts/postbyauthor/@Model.AppUserId">
-                            <img src="~/uploads/@Model.AppUser.ProfileImg" class="rounded-circle" style="width:40px;object-fit:cover;height:40px">
-                           @{
-                               var index = Model.AppUser.UserName.IndexOf('@');
-                           }
-                            @Model.AppUser.UserName.Substring(0,index)
+                        <a href="/posts/postbyauthor/@Model.Post.AppUserId">
+                            <img src="~/uploads/@Model.Post.AppUser.ProfileImg" class="rounded-circle" style="width:40px;object-fit:cover;height:40px">
+                            @{
+                                var index = Model.Post.AppUser.UserName.IndexOf('@');
+                            }
+                            @Model.Post.AppUser.UserName.Substring(0, index)
                         </a>
                     </div>
                     <div class="col-md-6">
                         <div class="time text-dark">
                             Published On
-                            <i class="fas fa-clock"></i> @Model.CreatedDate.ToString("dddd, dd MMMM yyyy")
+                            <i class="fas fa-clock"></i> @Model.Post.CreatedDate.ToString("dddd, dd MMMM yyyy")
                         </div>
                     </div>
                 </div>
                 <hr />
-                @if (Model.Picture != null)
+                @if (Model.Post.Picture != null)
                 {
-                    <img src="~/uploads/@Model.Picture" />
+                    <img src="~/uploads/@Model.Post.Picture" />
                 }
                 <hr />
                 @foreach (var item in Model.PostCategories)
@@ -47,7 +46,7 @@
                         </div>
                     </a>
                 }
-                @Html.Raw(Model.Content)
+                @Html.Raw(Model.Post.Content)
 
                 <div class="tag-wrapper my-5">
 
@@ -88,15 +87,19 @@
                             @post.Name
                             <div class="time text-dark">
 
-                                <i class="fas fa-clock"></i> @Model.CreatedDate.ToString("dddd, dd MMMM yyyy")
+                                <i class="fas fa-clock"></i> @Model.Post.CreatedDate.ToString("dddd, dd MMMM yyyy")
                             </div>
                         </div>
                     </div>
                 </a>
             </div>
         }
+
+
+        <div class="col-md-8">
+            <partial name="_Comment"/>
+        </div>
+
     </div>
-
 </div>
-
 

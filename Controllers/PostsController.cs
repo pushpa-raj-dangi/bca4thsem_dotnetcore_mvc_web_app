@@ -17,7 +17,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace NewsWebApp.Controllers
 {
-    [Authorize(Roles ="Admin")]
+    [Authorize]
     public class PostsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -186,13 +186,24 @@ namespace NewsWebApp.Controllers
         [HttpGet]
         public IActionResult Details(int id)
         {
+
             var post = _context.Posts.Include(news => news.PostCategories).ThenInclude(c => c.Category).Include(tag => tag.PostTags).ThenInclude(pt => pt.Tag).Include(u => u.AppUser).FirstOrDefault(pt => pt.Id == id);
             if (post == null)
                 return View("NotFound");
+
             var pId = post.PostCategories.Select(pn => pn.CategoryId).FirstOrDefault();
             ViewData["relatedPost"] = _context.Posts.Where(n => n.PostCategories.Any(pc => pc.CategoryId == pId)).ToList();
+            var user = _context.Users.Find(User.Identity.Name);
+
             ViewData["latest"] = _context.Posts.Include(l => l.PostCategories).ThenInclude(c => c.Category).Include(tag => tag.PostTags).ThenInclude(pt => pt.Tag).Include(u => u.AppUser).ToList().OrderByDescending(n => n.CreatedDate).Take(5);
-            return View(post);
+           
+            
+            var model = new PostDetailViewModel
+            {
+                Post = post,
+                Comments = _context.Comments.Where(d=>d.PostId==id).ToList()
+            };
+            return View(model);
         }
 
 

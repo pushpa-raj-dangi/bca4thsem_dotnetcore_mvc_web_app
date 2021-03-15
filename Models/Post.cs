@@ -8,7 +8,6 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using System.Web.Mvc;
 
 namespace NewsWebApp.Models
 {
@@ -25,7 +24,7 @@ namespace NewsWebApp.Models
         [Display(Name = "Post Title")]
         public string Name { get; set; }
         public string Slug { get; set; }
-        [AllowHtml]
+        
         [DataType(DataType.MultilineText)]
         public string Content { get; set; }
         public string Picture { get; set; }
@@ -47,9 +46,13 @@ namespace NewsWebApp.Models
         public DateTime CreatedDate { get; set; }
 
 
+        public ICollection<Comment> Comments { get; set; }
+
+
         public Post()
         {
             PostTags = new Collection<PostTag>();
+            Comments = new Collection<Comment>();
             PostCategories = new Collection<PostCategory>();
             CreatedDate = DateTime.UtcNow;
         }
