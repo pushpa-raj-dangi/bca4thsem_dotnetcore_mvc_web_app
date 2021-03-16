@@ -14,6 +14,7 @@ using NewsWebApp.Models;
 using NewsWebApp.ViewModels;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Identity;
 
 namespace NewsWebApp.Controllers
 {
@@ -22,15 +23,16 @@ namespace NewsWebApp.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment hostingEnvironment;
-
-        public PostsController(ApplicationDbContext context, IWebHostEnvironment hostingEnvironment)
+        private readonly UserManager<AppUser> _userManager;
+        public PostsController(ApplicationDbContext context, IWebHostEnvironment hostingEnvironment, UserManager<AppUser> userManager)
         {
             _context = context;
             this.hostingEnvironment = hostingEnvironment;
+            _userManager = userManager;
         }
         public IActionResult Index()
         {
-            var post = _context.Posts.Include(p => p.PostCategories).ThenInclude(c => c.Category).Include(tag => tag.PostTags).ThenInclude(pt => pt.Tag).Include(u=>u.AppUser).OrderByDescending(pid => pid.CreatedDate);
+            var post = _context.Posts.Include(p => p.PostCategories).ThenInclude(c => c.Category).Include(tag => tag.PostTags).ThenInclude(pt => pt.Tag).Include(u => u.AppUser).OrderByDescending(pid => pid.CreatedDate);
 
             return View(post);
         }
@@ -77,7 +79,6 @@ namespace NewsWebApp.Controllers
 
 
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var userName = User.FindFirstValue(ClaimTypes.Name);
             var user = _context.Users.Single(u => u.Id == userId);
 
             if (!ModelState.IsValid)
@@ -192,16 +193,19 @@ namespace NewsWebApp.Controllers
                 return View("NotFound");
 
             var pId = post.PostCategories.Select(pn => pn.CategoryId).FirstOrDefault();
-            ViewData["relatedPost"] = _context.Posts.Where(n => n.PostCategories.Any(pc => pc.CategoryId == pId)).ToList();
-            var user = _context.Users.Find(User.Identity.Name);
+            ViewData["relatedPost"] = _context.Posts.Where(n => n.PostCategories.Any(pc => pc.CategoryId == pId)).Take(3).ToList();
+            var userId = _userManager.GetUserId(User);
+            var user = _context.Users.Find(userId);
+
+            var Comments = _context.Comments.Include(p=>p.AppUser).Where(d => d.PostId == post.Id).ToList();
 
             ViewData["latest"] = _context.Posts.Include(l => l.PostCategories).ThenInclude(c => c.Category).Include(tag => tag.PostTags).ThenInclude(pt => pt.Tag).Include(u => u.AppUser).ToList().OrderByDescending(n => n.CreatedDate).Take(5);
-           
-            
+
             var model = new PostDetailViewModel
             {
                 Post = post,
-                Comments = _context.Comments.Where(d=>d.PostId==id).ToList()
+                ListComments = Comments,
+                AppUser = user
             };
             return View(model);
         }
@@ -223,7 +227,7 @@ namespace NewsWebApp.Controllers
 
         public IActionResult PostByAuthor(string id)
         {
-            var post = _context.Posts.Where(p => p.AppUser.Id==id).ToList();
+            var post = _context.Posts.Where(p => p.AppUser.Id == id).ToList();
 
             if (post.Count == 0)
             {

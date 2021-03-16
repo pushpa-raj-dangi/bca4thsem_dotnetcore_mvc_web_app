@@ -11,10 +11,10 @@
     <div class="row my-5">
         <div class="col-md-8">
             <div class="shadow-sm p-3">
-                <h3 class="my-5">@Model.Name</h3>
+                <h3 class="my-5">@Model.Post.Name</h3>
                 <hr />
-                <div class="row">
-                    <div class="col-md-6">
+                <div class="row align-items-center justify-content-between">
+                    <div class="col-md-3">
                         <a href="/posts/postbyauthor/@Model.Post.AppUserId">
                             <img src="~/uploads/@Model.Post.AppUser.ProfileImg" class="rounded-circle" style="width:40px;object-fit:cover;height:40px">
                             @{
@@ -23,8 +23,15 @@
                             @Model.Post.AppUser.UserName.Substring(0, index)
                         </a>
                     </div>
-                    <div class="col-md-6">
-                        <div class="time text-dark">
+                    <div class="col-md-4">
+                        <a href="#comment">
+                            <span class="comment-box">
+                                <span class="count">@(@Model.ListComments.Count() > 0 ? "" + @Model.ListComments.Count() + "" : "0")</span>  COMMENTS
+                            </span>
+                        </a>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="time text-dark" style="font-size:13px">
                             Published On
                             <i class="fas fa-clock"></i> @Model.Post.CreatedDate.ToString("dddd, dd MMMM yyyy")
                         </div>
@@ -59,20 +66,18 @@
                 </div>
 
             </div>
+            <div class="my-5"></div>
+            <partial name="_Comment" />
+
+
         </div>
         <div class="col-md-4">
-            <ul>
-                @foreach (var comment in Model.Comments)
-                {
-                    <li>
-                        @comment.CContent
-                    </li>
-                }
-            </ul>
             <partial name="_Latest" model="latest" />
         </div>
 
-        <div class="col-md-12 my-4">
+
+
+        <div class="col-md-12 pt-5 my-4">
             <div class="cat-title"> Related News    </div>
         </div>
         @foreach (var post in posts)
@@ -104,9 +109,7 @@
         }
 
 
-        <div class="col-md-8">
-            <partial name="_Comment" />
-        </div>
+
 
     </div>
 </div>

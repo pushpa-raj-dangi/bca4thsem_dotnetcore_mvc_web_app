@@ -20,6 +20,8 @@
     <Compile Remove="Migrations\20210305160203_AddedProfileImageInAppUserTable.Designer.cs" />
     <Compile Remove="Migrations\20210308142724_AddedRequiredAttributeInCategoriesAndTags.cs" />
     <Compile Remove="Migrations\20210308142724_AddedRequiredAttributeInCategoriesAndTags.Designer.cs" />
+    <Compile Remove="Migrations\20210315150814_AddCommentatorIncommentTable.cs" />
+    <Compile Remove="Migrations\20210315150814_AddCommentatorIncommentTable.Designer.cs" />
   </ItemGroup>
 
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -75,20 +76,24 @@ namespace NewsWebApp.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Add(PostDetailViewModel vm)
         {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = _context.Users.Single(u => u.Id == userId);
+
             var comment = vm.Comment;
             var id = vm.Id;
 
             if (ModelState.IsValid)
             {
-                _context.Add(comment);
-                 _context.SaveChanges();
+                //_context.Add(comment);
+                // _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             var newcomment = new Comment
             {
                 PostId = id,
                 CContent = vm.Comment,
-                DateComment = DateTime.Now
+                DateComment = DateTime.Now,
+                AppUser = user
 
             };
             _context.Comments.Add(newcomment);
