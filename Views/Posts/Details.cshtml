@@ -9,10 +9,16 @@
 
 <div class="container">
     <div class="row my-5">
+
         <div class="col-md-8">
+
             <div class="shadow-sm p-3">
+                <div class="d-none">
+                    <partial name="_Actions" />
+                </div>
                 <h3 class="my-5">@Model.Post.Name</h3>
                 <hr />
+
                 <div class="row align-items-center justify-content-between">
                     <div class="col-md-3">
                         <a href="/posts/postbyauthor/@Model.Post.AppUserId">

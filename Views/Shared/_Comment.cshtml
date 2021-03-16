@@ -5,13 +5,13 @@
     <hr />
     @foreach (var item in Model.ListComments)
     {
-        <div class="py-3 row">
+        <div class="py-3 row no-gutters">
             <div class="col-md-1">
                 @{
                     var index = item.AppUser.UserName.IndexOf('@');
                     var name = item.AppUser.UserName.Substring(0, index);
                 }
-                <img style="border-radius:50%" src="~/uploads/@item.AppUser.ProfileImg" alt="@item.AppUser.UserName" />
+                <img class="comment-img" style="border-radius:50%" src="~/uploads/@item.AppUser.ProfileImg" alt="@item.AppUser.UserName" />
             </div>
             <div class="col-md-11">
                 <h4 class="text-dark">@name</h4>
