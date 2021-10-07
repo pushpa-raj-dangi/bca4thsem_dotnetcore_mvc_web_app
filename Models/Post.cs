@@ -13,12 +13,7 @@ namespace NewsWebApp.Models
 {
     public class Post
     {
-        private readonly ApplicationDbContext _context;
-
-        public Post(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+        
         public int Id { get; set; }
         [Required]
         [Display(Name = "Post Title")]

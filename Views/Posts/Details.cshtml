@@ -49,7 +49,7 @@
                     <img src="~/uploads/@Model.Post.Picture" />
                 }
                 <hr />
-                @foreach (var item in Model.PostCategories)
+                @foreach (var item in Model.Post.PostCategories)
                 {
                     <a href="/posts/postbycat/@item.Category.Id">
                         <div class="category">
@@ -63,7 +63,7 @@
 
                 <div class="tag-wrapper my-5">
 
-                    @foreach (var item in Model.PostTags)
+                    @foreach (var item in Model.Post.PostTags)
                     {
                         <a href="/posts/postbytag/@item.Tag.Id" class="tag">
                             # @item.Tag.Name

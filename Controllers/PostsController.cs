@@ -183,12 +183,14 @@ namespace NewsWebApp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-
+        [AllowAnonymous]
         [HttpGet]
-        public IActionResult Details(int id)
+        public IActionResult Details(int? id)
         {
 
             var post = _context.Posts.Include(news => news.PostCategories).ThenInclude(c => c.Category).Include(tag => tag.PostTags).ThenInclude(pt => pt.Tag).Include(u => u.AppUser).FirstOrDefault(pt => pt.Id == id);
+
+
             if (post == null)
                 return View("NotFound");
 
@@ -197,7 +199,7 @@ namespace NewsWebApp.Controllers
             var userId = _userManager.GetUserId(User);
             var user = _context.Users.Find(userId);
 
-            var Comments = _context.Comments.Include(p=>p.AppUser).Where(d => d.PostId == post.Id).ToList();
+            var Comments = _context.Comments.Include(p => p.AppUser).Where(d => d.PostId == post.Id).ToList();
 
             ViewData["latest"] = _context.Posts.Include(l => l.PostCategories).ThenInclude(c => c.Category).Include(tag => tag.PostTags).ThenInclude(pt => pt.Tag).Include(u => u.AppUser).ToList().OrderByDescending(n => n.CreatedDate).Take(5);
 
@@ -212,6 +214,7 @@ namespace NewsWebApp.Controllers
 
 
 
+        [AllowAnonymous]
         public IActionResult PostByCat(int? id)
         {
             var post = _context.Posts.Where(p => p.PostCategories.Any(pc => pc.CategoryId == id)).OrderByDescending(p => p.CreatedDate).ToList();
@@ -224,6 +227,8 @@ namespace NewsWebApp.Controllers
             ViewData["category"] = _context.Categories.SingleOrDefault(p => p.Id == id).Name;
             return View(post);
         }
+
+        [AllowAnonymous]
 
         public IActionResult PostByAuthor(string id)
         {
@@ -239,6 +244,7 @@ namespace NewsWebApp.Controllers
             return View(post);
         }
 
+        [AllowAnonymous]
 
         public IActionResult PostByTag(int id)
         {

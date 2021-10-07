@@ -12,7 +12,7 @@ using NewsWebApp.Models;
 using NewsWebApp.ViewModels;
 namespace NewsWebApp.Controllers
 {
-    [Authorize]
+
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -46,8 +46,8 @@ namespace NewsWebApp.Controllers
                 //PostsByAuthor = _context.Posts.Include(post => post.AppUser).ToList()
         };
 
-            if (!User.Identity.IsAuthenticated)
-                return View();
+            //if (!User.Identity.IsAuthenticated)
+            //    return View();
             return View("Notlogin", homeViewModel);
         }
 
